@@ -14,14 +14,28 @@
 	</div>
 	<div class="right-interface">
 		<h1>Burrinho Game</h1>
+		<div class="controls">
+			<span>categoria</span>
+			<select id="category">
+				<option>cantor</option>
+				<option>jogador</option>
+				<option>país</option>
+			</select>
+			<span>modo</span>
+			<select id="mode">
+				<option>amigo</option>
+				<option>computador</option>
+			</select>
+			<button id="start">iniciar</button>
+		</div>
 		<div class="square-container">
 			<div class="player1">
 				<span>Jogador 1</span>
 				<div class="little-square">
-					B
+					
 				</div>
 				<div class="little-square">
-					U
+					
 				</div>
 				<div class="little-square">
 					
@@ -66,27 +80,30 @@
 					
 				</div>
 				<div class="little-square">
-					O
+					
 				</div>
 			</div>
 			<div class="game--controls">
 				<div class="control-top">
 					<div class="buttons">
-						<button>CONCLUIR</button>
+						<button id="play">JOGAR</button>
 						<button>DICAS</button>
 						<button>AJUDA</button>
 						<button>INSTRUÇÕES</button>
 					</div>
 					<div class="type-text">
-						<button>permitir jogada j1</button>
-						<input type="text" name="">
-						<button>permitir jogada j2</button>
+						<div id="player1">J1</div>
+						<input type="text" maxlength="1">
+						<div id="player2">J2</div>
+						<button id="done">concluir</button>
 					</div>
+					<div class="show-words"></div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<script src="assets/js/jogadores.js"></script>
 <script src="assets/js/script.js"></script>
 </body>
 </html>
