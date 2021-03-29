@@ -202,7 +202,6 @@ body{
 		flex-direction: column;
 		align-items: center;
 	}
-	
 	.type-text--inner{
 		margin-bottom: 5px;
 	}
@@ -220,8 +219,14 @@ body{
     font-size: 0.7rem;
 }
 #question-mark-j1, #question-mark-j2 {
+	width:unset;
+	height: unset;
     width: 25px;
     height: 27px;
+}
+#question-mark-j1 img, #question-mark-j2 img {
+	width:unset;
+	width: 100%;
 }
 }
 
@@ -270,7 +275,6 @@ body{
 	.type-text input {
 	    padding: 5px;
 	   width: 150px;
-	   font-size: 1rem;
 	}
 	.type-text--inner{
 		margin-bottom: 5px;
