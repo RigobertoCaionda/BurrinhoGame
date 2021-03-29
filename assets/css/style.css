@@ -219,14 +219,8 @@ body{
     font-size: 0.7rem;
 }
 #question-mark-j1, #question-mark-j2 {
-	width:unset;
-	height: unset;
     width: 25px;
     height: 27px;
-}
-#question-mark-j1 img, #question-mark-j2 img {
-	width:unset;
-	width: 100%;
 }
 }
 
