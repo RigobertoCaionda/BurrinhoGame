@@ -169,6 +169,9 @@ body{
 		justify-content: flex-start;
 		padding:0;
 	}
+	.type-text input {
+	   font-size: 17px;
+	}
 	.right-interface{
 		padding:0;
 		margin-left: 0;
