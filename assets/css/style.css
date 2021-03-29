@@ -96,6 +96,15 @@ body{
 	padding:5px;
 	cursor: pointer;
 }
+#question-mark-j1, #question-mark-j2{
+	width: 30px;
+	height: 32px;
+	margin-right: 5px;
+
+}
+#question-mark-j1 img, #question-mark-j2 img{
+	width: 100%;
+}
 #player1, #player2{
 	width: 30px;
 	height: 30px;
@@ -150,4 +159,135 @@ body{
 	animation-name: pulse;
 	animation-duration: 1s;
 	animation-iteration-count: infinite;
+}
+.type-text--inner{
+	display: flex;
+}
+@media(min-width: 375px) and (max-width: 425px){
+	.table{
+		flex-direction: column;
+		justify-content: flex-start;
+		padding:0;
+	}
+	.right-interface{
+		padding:0;
+		margin-left: 0;
+	}
+	.right-interface h1{
+		margin: 25px 0;
+		font-size: 1.1rem;
+		text-transform: uppercase;
+	}
+	.little-square {
+	    width: 25px;
+	    height: 25px;
+	    line-height: 25px;
+	    font-size: 1.3rem;
+	}
+	.controls span {
+	    font-size: 0.8rem;
+	}
+	.player1 span, .player2 span {
+	    font-size: 0.8rem;
+	}
+	.game--controls {
+	    background-color: rgba(0,0,0,.4);
+	    padding: 25px 0;
+	}
+	.buttons button {
+	    padding: 4px;
+	    font-size: 0.5rem;
+	}
+	.type-text{
+		flex-direction: column;
+		align-items: center;
+	}
+	.type-text--inner{
+		margin-bottom: 5px;
+	}
+	#done{
+		padding-left: 50px;
+		padding-right: 50px;
+	}
+	#player1{
+		margin-left: 5px;
+	}
+	#player1, #player2 {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 0.7rem;
+}
+#question-mark-j1, #question-mark-j2 {
+    width: 25px;
+    height: 27px;
+}
+}
+
+@media(max-width: 374px){
+	.table{
+		flex-direction: column;
+		justify-content: flex-start;
+		padding:0;
+	}
+	.right-interface{
+		padding:0;
+		margin-left: 0;
+	}
+	.right-interface h1{
+		margin: 25px 0;
+		font-size: 1.1rem;
+		text-transform: uppercase;
+	}
+	.little-square {
+	    width: 25px;
+	    height: 25px;
+	    line-height: 25px;
+	    font-size: 1.3rem;
+	}
+	.controls span {
+	    font-size: 0.6rem;
+	}
+	.player1 span, .player2 span {
+	    font-size: 0.6rem;
+	}
+	.controls select {
+	    font-size: 0.6rem;
+	}
+	.game--controls {
+	    background-color: rgba(0,0,0,.4);
+	    padding: 25px 0;
+	}
+	.buttons button {
+	    padding: 4px;
+	    font-size: 0.5rem;
+	}
+	.type-text{
+		flex-direction: column;
+		align-items: center;
+	}
+	.type-text input {
+	    padding: 5px;
+	   width: 150px;
+	}
+	.type-text--inner{
+		margin-bottom: 5px;
+	}
+	#done{
+		padding-left: 50px;
+		padding-right: 50px;
+	}
+	#player1{
+		margin-left: 5px;
+	}
+	#player1, #player2 {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 0.7rem;
+}
+#question-mark-j1, #question-mark-j2 {
+    width: 25px;
+    height: 27px;
+}
 }

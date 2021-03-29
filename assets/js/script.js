@@ -8,6 +8,74 @@ let showWord = document.querySelector('.show-words');
 let done = document.querySelector('#done');
 let player1Square = document.querySelectorAll('.player1 .little-square');
 let player2Square = document.querySelectorAll('.player2 .little-square');
+
+function playFunction(){
+	if(player1.classList.contains('pulse')){
+			if(typedLetter.value !== ''){
+				showWord.innerHTML += `${typedLetter.value.toUpperCase()}`; 
+				player1.classList.remove('pulse');
+				player2.classList.add('pulse');
+				typedLetter.value = '';
+			}else{
+				alert('O jogador 1 precisa digitar alguma letra');
+			}
+	}else if(player2.classList.contains('pulse')){
+		if(typedLetter.value !== ''){
+			showWord.innerHTML += `${typedLetter.value.toUpperCase()}`;
+			player2.classList.remove('pulse');
+			player1.classList.add('pulse');
+			typedLetter.value = '';
+		}else{
+			alert('O jogador 2 precisa digitar alguma letra');
+		}
+	}
+	typedLetter.focus();
+		}
+
+				function finish(){
+						if(showWord.innerHTML !== '' && player1.classList.contains('pulse')){
+								let searchResult = jogadores.findIndex((item)=>{
+									if(item.nome == showWord.innerHTML.toLowerCase() || 
+										item.sobrenome == showWord.innerHTML.toLowerCase()){
+										return true;
+									}else{
+											return false;
+									}
+								});
+									if(searchResult > -1){
+										let audio = new Audio('assets/audio/applause3.mp3');
+										audio.play();
+									}else{
+										let audio = new Audio('assets/audio/erro.mp3');
+										audio.play();
+										player1Square[errosJ1].innerHTML = perdeu[errosJ1];
+										errosJ1++;
+									}
+								}else if(showWord.innerHTML !== '' && player2.classList.contains('pulse')){
+									let searchResult = jogadores.findIndex((item)=>{
+										if(item.nome == showWord.innerHTML.toLowerCase() || 
+											item.sobrenome == showWord.innerHTML.toLowerCase()){
+											return true;
+										}else{
+											return false;
+										}
+									});
+										if(searchResult > -1){
+											let audio = new Audio('assets/audio/applause3.mp3');
+											audio.play();
+									}else{
+										let audio = new Audio('assets/audio/erro.mp3');
+										audio.play();
+										player2Square[errosJ2].innerHTML = perdeu[errosJ2];
+										errosJ2++;
+									}
+								}else{
+									//Colocar um audio de aviso
+									alert('Jogador 1 ou  jogador 2 não preencheu nenhuma letra!');
+								}
+								showWord.innerHTML = '';
+						}
+
 startGame.addEventListener('click',()=>{
 	playing = true;
 	let category = document.querySelector('#category');
@@ -47,67 +115,17 @@ startGame.addEventListener('click',()=>{
 						}
 						player2.classList.add('pulse');
 					}
-					play.addEventListener('click',()=>{
-						if(player1.classList.contains('pulse')){
-							if(typedLetter.value !== ''){
-								showWord.innerHTML += `${typedLetter.value.toUpperCase()}`; 
-								player1.classList.remove('pulse');
-								player2.classList.add('pulse');
-								typedLetter.value = '';
-							}else{
-								alert('O jogador 1 precisa digitar alguma letra');
-							}
-					}else if(player2.classList.contains('pulse')){
-						if(typedLetter.value !== ''){
-							showWord.innerHTML += `${typedLetter.value.toUpperCase()}`;
-							player2.classList.remove('pulse');
-							player1.classList.add('pulse');
-							typedLetter.value = '';
-						}else{
-							alert('O jogador 2 precisa digitar alguma letra');
+					play.addEventListener('click', playFunction);
+					typedLetter.addEventListener('keyup',(e)=>{
+						if(e.keyCode == 13){
+							playFunction();
 						}
-					}
-					typedLetter.focus();
 					});
-					done.addEventListener('click',()=>{
-						if(showWord.innerHTML !== '' && player1.classList.contains('pulse')){
-							let searchResult = jogadores.findIndex((item)=>{
-								if(item.nome == showWord.innerHTML.toLowerCase() || 
-									item.sobrenome == showWord.innerHTML.toLowerCase()){
-									return true;
-								}else{
-										return false;
-								}
-							});
-							if(searchResult > -1){
-								alert('Jogador 1 concluiu e acertou!');
-							}else{
-								//Audio de erro
-								alert('Jogador 1 concluiu e errou!');
-								player1Square[errosJ1].innerHTML = perdeu[errosJ1];
-								errosJ1++;
-							}
-						}else if(showWord.innerHTML !== '' && player2.classList.contains('pulse')){
-							let searchResult = jogadores.findIndex((item)=>{
-								if(item.nome == showWord.innerHTML.toLowerCase() || 
-									item.sobrenome == showWord.innerHTML.toLowerCase()){
-									return true;
-								}else{
-									return false;
-								}
-							});
-								if(searchResult > -1){
-									alert('Jogador 2 concluiu e acertou!');
-							}else{
-								//Audio de erro
-								alert('Jogador 2 concluiu e errou!');
-								player2Square[errosJ2].innerHTML = perdeu[errosJ2];
-								errosJ2++;
-							}
-						}else{
-							alert('Jogador 1 ou  jogador 2 não preencheu nenhuma letra!');
+					done.addEventListener('click', finish);
+					document.addEventListener('keyup',(e)=>{
+						if(e.keyCode == 16){
+							finish();
 						}
-						showWord.innerHTML = '';
 					});
 				}
 				break;
@@ -132,4 +150,5 @@ startGame.addEventListener('click',()=>{
 		default:
 		alert('Escolha uma categoria válida!');
 	}
+	typedLetter.focus();
 });
