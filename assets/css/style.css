@@ -169,10 +169,6 @@ body{
 		justify-content: flex-start;
 		padding:0;
 	}
-	.type-text input {
-		padding:0 0 0 5px;
-	   font-size: 1rem;/*Preventing from ios zoom out*/
-	}
 	.right-interface{
 		padding:0;
 		margin-left: 0;
@@ -206,6 +202,7 @@ body{
 		flex-direction: column;
 		align-items: center;
 	}
+	
 	.type-text--inner{
 		margin-bottom: 5px;
 	}
