@@ -33,10 +33,9 @@ body{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
 	margin-left: 20px;
 	background-color: rgba(0,0,0,.4);
-	padding:0px 50px;
+	padding: 0px 50px;
 }
 .right-interface h1{
 	margin-bottom: 10px;
@@ -176,6 +175,28 @@ body{
 .type-text--inner{
 	display: flex;
 }
+.image-panel{
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	background-color: rgba(0,0,0,.4);
+	width: 100%;
+	margin-top: 10px;
+	padding:15px;
+}
+.player-name, .player-club{
+	font-weight: bold;
+	text-align: center;
+	text-transform: capitalize;
+}
+.image-controller{
+	width: 150px;
+	height: 100px;
+}
+.image-controller img{
+	width: 100%;
+	height: 100%;
+}
 @media(min-width: 375px) and (max-width: 425px){
 	.table{
 		flex-direction: column;
@@ -219,9 +240,8 @@ body{
 		margin-bottom: 5px;
 	}
 	#done{
-		width: 200px;
 		font-size: 1rem;
-		padding:5px 0px;
+		padding:5px 50px;
 	}
 	#player1{
 		margin-left: 5px;
@@ -296,7 +316,7 @@ body{
 	}
 	#player1, #player2 {
     width: 25px;
-    height: 25px;
+    height: 27px;
     line-height: 25px;
     font-size: 0.7rem;
 }
