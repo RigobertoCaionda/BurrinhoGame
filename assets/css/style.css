@@ -219,8 +219,9 @@ body{
 		margin-bottom: 5px;
 	}
 	#done{
+		width: 200px;
 		font-size: 1rem;
-		padding:5px 50px;
+		padding:5px 0px;
 	}
 	#player1{
 		margin-left: 5px;
