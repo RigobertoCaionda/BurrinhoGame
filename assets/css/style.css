@@ -206,6 +206,7 @@ body{
 		margin-bottom: 5px;
 	}
 	#done{
+		padding: unset;
 		font-size: 1rem;
 		padding:5px 50px;
 	}
