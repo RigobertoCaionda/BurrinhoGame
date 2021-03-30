@@ -206,7 +206,7 @@ body{
 		margin-bottom: 5px;
 	}
 	#done{
-		padding:unset;
+		font-size: 0.7rem;
 		padding:5px 50px;
 	}
 	#player1{
