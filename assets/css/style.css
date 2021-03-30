@@ -97,13 +97,21 @@ body{
 	cursor: pointer;
 }
 #question-mark-j1, #question-mark-j2{
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 30px;
-	height: 32px;
+	height: 30px;
 	margin-right: 5px;
+	background-color: #efefef;
+	cursor: pointer;
 
 }
+#question-mark-j1:hover, #question-mark-j2:hover{
+	background-color: #aaa;
+}
 #question-mark-j1 img, #question-mark-j2 img{
-	width: 100%;
+	width: 75%;
 }
 #player1, #player2{
 	width: 30px;
@@ -160,6 +168,11 @@ body{
 	animation-duration: 1s;
 	animation-iteration-count: infinite;
 }
+#done{
+	font-weight: normal;
+	font-size: 0.9rem;
+	cursor: pointer;
+}
 .type-text--inner{
 	display: flex;
 }
@@ -206,7 +219,6 @@ body{
 		margin-bottom: 5px;
 	}
 	#done{
-		padding: unset;
 		font-size: 1rem;
 		padding:5px 50px;
 	}
@@ -215,7 +227,7 @@ body{
 	}
 	#player1, #player2 {
     width: 25px;
-    height: 25px;
+    height: 27px;
     line-height: 25px;
     font-size: 0.7rem;
 }
