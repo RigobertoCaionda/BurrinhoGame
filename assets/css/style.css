@@ -196,7 +196,7 @@ body{
 	}
 	.buttons button {
 	    padding: 4px;
-	    font-size: 0.5rem;
+	    font-size: 0.7rem;
 	}
 	.type-text{
 		flex-direction: column;
@@ -206,8 +206,8 @@ body{
 		margin-bottom: 5px;
 	}
 	#done{
-		padding-left: 50px;
-		padding-right: 50px;
+		padding:unset;
+		padding:5px 50px;
 	}
 	#player1{
 		margin-left: 5px;
