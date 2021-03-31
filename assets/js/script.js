@@ -12,6 +12,10 @@ let showWord = document.querySelector('.show-words');
 let done = document.querySelector('#done');
 let player1Square = document.querySelectorAll('.player1 .little-square');
 let player2Square = document.querySelectorAll('.player2 .little-square');
+let pontosJ1 = 0;
+let pontosJ2 = 0;
+let pontuacaoJ1 = document.querySelector('#pontuacaoJ1');
+let pontuacaoJ2 = document.querySelector('#pontuacaoJ2');
 
 function playFunction(){
 	if(player1.classList.contains('pulse')){
@@ -37,11 +41,11 @@ function playFunction(){
 		}
 		function interroga1(){
 			let searchResultInt1 = jogadores.findIndex((item)=>{
-				if(item.nome == showWord.innerHTML.toLowerCase() || 
-					item.sobrenome == showWord.innerHTML.toLowerCase()){
-					return true;
+				let padrao = `/\^[${item.nome}\] | ${item.sobrenome}/g/`
+				if(padrao.match(showWord.innerHTML.toLowerCase()) !== null){
+					return true;//nao pode aceitar que eu escreva so i e dizer que faz parte de messi
 				}else{
-						return false;
+					return false;
 				}
 			});
 			if(searchResultInt1 > -1){
@@ -65,15 +69,39 @@ function playFunction(){
 				player2Square[errosJ2].innerHTML = perdeu[errosJ2];
 				errosJ2++;
 			}
+			if(errosJ2 == 8){
+				pontosJ1++;
+				alert('j2 perdeu!');
+				pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
+				pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
+				errosJ1 = 0;
+				errosJ2 = 0;
+				for(let i = 0; i < player1Square.length; i++){
+					player1Square[i].innerHTML = '';
+					player2Square[i].innerHTML = '';
+				}
+			}
+			else if(errosJ1 == 8){
+				pontosJ2++;
+				alert("Jogador 1 perdeu!");
+				pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
+				pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
+				errosJ1 = 0;
+				errosJ2 = 0;
+				for(let i = 0; i < player1Square.length; i++){
+					player1Square[i].innerHTML = '';
+					player2Square[i].innerHTML = '';
+				}
+			}
 			showWord.innerHTML = '';
 		}
 		function interroga2(){
 			let searchResultInt2 = jogadores.findIndex((item)=>{
-				if(item.nome == showWord.innerHTML.toLowerCase() || 
-					item.sobrenome == showWord.innerHTML.toLowerCase()){
-					return true;
+				let padrao = `/\^[${item.nome}\] | ${item.sobrenome}/g/`
+				if(padrao.match(showWord.innerHTML.toLowerCase()) !== null){
+					return true;//nao pode aceitar que eu escreva so i e dizer que faz parte de messi
 				}else{
-						return false;
+					return false;
 				}
 			});
 			if(searchResultInt2 > -1){
@@ -96,6 +124,30 @@ function playFunction(){
 				imagePanel.style.display = 'none';
 				player1Square[errosJ1].innerHTML = perdeu[errosJ1];
 				errosJ1++;
+			}
+			if(errosJ2 == 8){
+				pontosJ1++;
+				alert("Jogador 2 perdeu!");
+				pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
+				pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
+				errosJ1 = 0;
+				errosJ2 = 0;
+				for(let i = 0; i < player1Square.length; i++){
+					player1Square[i].innerHTML = '';
+					player2Square[i].innerHTML = '';
+				}
+			}
+			else if(errosJ1 == 8){
+				pontosJ2++;
+				alert("Jogador 1 perdeu!");
+				pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
+				pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
+				errosJ1 = 0;
+				errosJ2 = 0;
+				for(let i = 0; i < player1Square.length; i++){
+					player1Square[i].innerHTML = '';
+					player2Square[i].innerHTML = '';
+				}
 			}
 			showWord.innerHTML = '';
 		}
@@ -162,6 +214,30 @@ function playFunction(){
 									//Colocar um audio de aviso
 									alert('Jogador 1 ou  jogador 2 não preencheu nenhuma letra!');
 								}
+								if(errosJ2 == 8){
+									pontosJ1++;
+									alert("Jogador 2 perdeu!");
+									pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
+									pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
+									errosJ1 = 0;
+									errosJ2 = 0;
+									for(let i = 0; i < player1Square.length; i++){
+										player1Square[i].innerHTML = '';
+										player2Square[i].innerHTML = '';
+									}
+								}
+									else if(errosJ1 == 8){
+										pontosJ2++;
+										alert("Jogador 1 perdeu!");
+										pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
+										pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
+										errosJ1 = 0;
+										errosJ2 = 0;
+										for(let i = 0; i < player1Square.length; i++){
+											player1Square[i].innerHTML = '';
+											player2Square[i].innerHTML = '';
+										}
+									}
 								showWord.innerHTML = '';
 						}
 
