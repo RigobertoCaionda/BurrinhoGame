@@ -212,6 +212,11 @@ body{
 #pontuacaoJ2{
 	padding-right: 5px;
 }
+.deletedNames{
+	background-color: red;
+	width: 100%;
+	text-align: center;
+}
 @media(min-width: 375px) and (max-width: 425px){
 	.table{
 		flex-direction: column;

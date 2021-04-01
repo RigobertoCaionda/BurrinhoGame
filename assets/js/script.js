@@ -14,6 +14,8 @@ let player1Square = document.querySelectorAll('.player1 .little-square');
 let player2Square = document.querySelectorAll('.player2 .little-square');
 let pontosJ1 = 0;
 let pontosJ2 = 0;
+let nomesExcluidos = [];
+let deletedNames = document.querySelector('.deletedNames');
 let pontuacaoJ1 = document.querySelector('#pontuacaoJ1');
 let pontuacaoJ2 = document.querySelector('#pontuacaoJ2');
 
@@ -40,10 +42,11 @@ function playFunction(){
 			typedLetter.focus();
 		}
 		function interroga1(){
+			let promptText = prompt("J2, digite as restantes letras");
+			let validation = `${showWord.innerHTML}${promptText}`;
 			let searchResultInt1 = jogadores.findIndex((item)=>{
-				let padrao = `/\^[${item.nome}\] | ${item.sobrenome}/g/`
-				if(padrao.match(showWord.innerHTML.toLowerCase()) !== null){
-					return true;//nao pode aceitar que eu escreva so i e dizer que faz parte de messi
+				if(item.nome == validation.toLowerCase() || item.sobrenome == validation.toLowerCase()){
+					return true;
 				}else{
 					return false;
 				}
@@ -60,6 +63,11 @@ function playFunction(){
 					playerImg.src = jogadores[searchResultInt1].img;
 				}else{
 					playerImg.src = 'assets/images/anonimo.jpg';
+				}
+				nomesExcluidos.push(`${jogadores[searchResultInt1].nome} ${jogadores[searchResultInt1].sobrenome}`);
+				deletedNames.innerHTML = '';
+				for(let i = 0; i < nomesExcluidos.length; i++){
+					deletedNames.innerHTML += `${nomesExcluidos[i]}<br>`;
 				}
 				jogadores.splice(searchResultInt1,1);
 			}else{
@@ -96,10 +104,11 @@ function playFunction(){
 			showWord.innerHTML = '';
 		}
 		function interroga2(){
+			let promptText = prompt("J1, digite as restantes letras");
+			let validation = `${showWord.innerHTML}${promptText}`;
 			let searchResultInt2 = jogadores.findIndex((item)=>{
-				let padrao = `/\^[${item.nome}\] | ${item.sobrenome}/g/`
-				if(padrao.match(showWord.innerHTML.toLowerCase()) !== null){
-					return true;//nao pode aceitar que eu escreva so i e dizer que faz parte de messi
+				if(item.nome == validation.toLowerCase() || item.sobrenome == validation.toLowerCase()){
+					return true;
 				}else{
 					return false;
 				}
@@ -117,6 +126,11 @@ function playFunction(){
 			}else{
 				playerImg.src = 'assets/images/anonimo.jpg';
 			}
+			nomesExcluidos.push(`${jogadores[searchResultInt2].nome} ${jogadores[searchResultInt2].sobrenome}`);
+				deletedNames.innerHTML = '';
+				for(let i = 0; i < nomesExcluidos.length; i++){
+					deletedNames.innerHTML += `${nomesExcluidos[i]}<br>`;
+				}
 				jogadores.splice(searchResultInt2,1);
 			}else{
 				let audio = new Audio('assets/audio/erro.mp3');
@@ -173,6 +187,11 @@ function playFunction(){
 										}else{
 											playerImg.src = 'assets/images/anonimo.jpg';
 										}
+										nomesExcluidos.push(`${jogadores[searchResult].nome} ${jogadores[searchResult].sobrenome}`);
+										deletedNames.innerHTML = '';
+										for(let i = 0; i < nomesExcluidos.length; i++){
+											deletedNames.innerHTML += `${nomesExcluidos[i]}<br>`;
+										}
 										jogadores.splice(searchResult,1);
 									}else{
 										let audio = new Audio('assets/audio/erro.mp3');
@@ -201,7 +220,11 @@ function playFunction(){
 										}else{
 												playerImg.src = 'assets/images/anonimo.jpg';
 										}
-
+										nomesExcluidos.push(`${jogadores[searchResult].nome} ${jogadores[searchResult].sobrenome}`);
+										deletedNames.innerHTML = '';
+										for(let i = 0; i < nomesExcluidos.length; i++){
+											deletedNames.innerHTML += `${nomesExcluidos[i]}<br>`;
+										}
 											jogadores.splice(searchResult,1);
 									}else{
 										let audio = new Audio('assets/audio/erro.mp3');
@@ -253,11 +276,11 @@ startGame.addEventListener('click',()=>{
 			switch(modeValue){
 				case 'amigo':
 				//caso de amigo
-					alert(`${catValue} ${modeValue}`);
+					alert('categoria não disponivel no momento!');
 				break;
 				case 'computador':
 				//caso de pc
-					alert(`${catValue} ${modeValue}`);
+					alert('categoria não disponivel no momento!');
 				break;
 			}
 		break;
@@ -325,7 +348,7 @@ startGame.addEventListener('click',()=>{
 				}
 				break;
 				case 'computador':
-				alert('jogando com pc');
+				alert('categoria não disponivel no momento');
 					//regras para computador
 				break;
 			}
@@ -334,11 +357,11 @@ startGame.addEventListener('click',()=>{
 			switch(modeValue){
 					case 'amigo':
 					//caso amigo
-					alert(`${catValue} ${modeValue}`);
+					alert('categoria não disponivel no momento!');
 					break;
 					case 'computador':
 					//caso de pc
-					alert(`${catValue} ${modeValue}`);
+					alert('categoria não disponivel no momento');
 					break;
 			}
 		break;
