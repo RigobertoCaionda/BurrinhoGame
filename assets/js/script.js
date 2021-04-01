@@ -18,253 +18,16 @@ let nomesExcluidos = [];
 let deletedNames = document.querySelector('.deletedNames');
 let pontuacaoJ1 = document.querySelector('#pontuacaoJ1');
 let pontuacaoJ2 = document.querySelector('#pontuacaoJ2');
+let jog;//copia do jogador
+function jogadoresCopy(){
+	jog = jogadores.map((item)=>{
+		return item;
+	});
+	
+}
+jogadoresCopy();//
 
-function playFunction(){
-	if(player1.classList.contains('pulse')){
-			if(typedLetter.value !== ''){
-				showWord.innerHTML += `${typedLetter.value.toUpperCase()}`;
-				player1.classList.remove('pulse');
-				player2.classList.add('pulse');
-				typedLetter.value = '';
-			}else{
-				alert('O jogador 1 precisa digitar alguma letra');
-			}
-	}else if(player2.classList.contains('pulse')){
-		if(typedLetter.value !== ''){
-			showWord.innerHTML += `${typedLetter.value.toUpperCase()}`;
-			player2.classList.remove('pulse');
-			player1.classList.add('pulse');
-			typedLetter.value = '';
-		}else{
-			alert('O jogador 2 precisa digitar alguma letra');
-		}
-	}
-			typedLetter.focus();
-		}
-		function interroga1(){
-			let promptText = prompt("J2, digite as restantes letras");
-			let validation = `${showWord.innerHTML}${promptText}`;
-			let searchResultInt1 = jogadores.findIndex((item)=>{
-				if(item.nome == validation.toLowerCase() || item.sobrenome == validation.toLowerCase()){
-					return true;
-				}else{
-					return false;
-				}
-			});
-			if(searchResultInt1 > -1){
-				player1Square[errosJ1].innerHTML = perdeu[errosJ1];
-				errosJ1++;
-				let audio = new Audio('assets/audio/applause3.mp3');
-				audio.play();
-				imagePanel.style.display = 'flex';
-				playerName.innerHTML = `Nome: ${jogadores[searchResultInt1].nome} ${jogadores[searchResultInt1].sobrenome}`;
-				playerClub.innerHTML = `Clube: ${jogadores[searchResultInt1].clube}`;
-				if(jogadores[searchResultInt1].img !== undefined){
-					playerImg.src = jogadores[searchResultInt1].img;
-				}else{
-					playerImg.src = 'assets/images/anonimo.jpg';
-				}
-				nomesExcluidos.push(`${jogadores[searchResultInt1].nome} ${jogadores[searchResultInt1].sobrenome}`);
-				deletedNames.innerHTML = '';
-				for(let i = 0; i < nomesExcluidos.length; i++){
-					deletedNames.innerHTML += `${nomesExcluidos[i]}<br>`;
-				}
-				jogadores.splice(searchResultInt1,1);
-			}else{
-				let audio = new Audio('assets/audio/erro.mp3');
-				audio.play();
-				imagePanel.style.display = 'none';
-				player2Square[errosJ2].innerHTML = perdeu[errosJ2];
-				errosJ2++;
-			}
-			if(errosJ2 == 8){
-				pontosJ1++;
-				alert('j2 perdeu!');
-				pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
-				pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
-				errosJ1 = 0;
-				errosJ2 = 0;
-				for(let i = 0; i < player1Square.length; i++){
-					player1Square[i].innerHTML = '';
-					player2Square[i].innerHTML = '';
-				}
-			}
-			else if(errosJ1 == 8){
-				pontosJ2++;
-				alert("Jogador 1 perdeu!");
-				pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
-				pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
-				errosJ1 = 0;
-				errosJ2 = 0;
-				for(let i = 0; i < player1Square.length; i++){
-					player1Square[i].innerHTML = '';
-					player2Square[i].innerHTML = '';
-				}
-			}
-			showWord.innerHTML = '';
-		}
-		function interroga2(){
-			let promptText = prompt("J1, digite as restantes letras");
-			let validation = `${showWord.innerHTML}${promptText}`;
-			let searchResultInt2 = jogadores.findIndex((item)=>{
-				if(item.nome == validation.toLowerCase() || item.sobrenome == validation.toLowerCase()){
-					return true;
-				}else{
-					return false;
-				}
-			});
-			if(searchResultInt2 > -1){
-			player2Square[errosJ2].innerHTML = perdeu[errosJ2];
-			errosJ2++;
-			let audio = new Audio('assets/audio/applause3.mp3');
-			audio.play();
-			imagePanel.style.display = 'flex';
-			playerName.innerHTML = `Nome: ${jogadores[searchResultInt2].nome} ${jogadores[searchResultInt2].sobrenome}`;
-			playerClub.innerHTML = `Clube: ${jogadores[searchResultInt2].clube}`;
-			if(jogadores[searchResultInt2].img !== undefined){
-				playerImg.src = jogadores[searchResultInt2].img;
-			}else{
-				playerImg.src = 'assets/images/anonimo.jpg';
-			}
-			nomesExcluidos.push(`${jogadores[searchResultInt2].nome} ${jogadores[searchResultInt2].sobrenome}`);
-				deletedNames.innerHTML = '';
-				for(let i = 0; i < nomesExcluidos.length; i++){
-					deletedNames.innerHTML += `${nomesExcluidos[i]}<br>`;
-				}
-				jogadores.splice(searchResultInt2,1);
-			}else{
-				let audio = new Audio('assets/audio/erro.mp3');
-				audio.play();
-				imagePanel.style.display = 'none';
-				player1Square[errosJ1].innerHTML = perdeu[errosJ1];
-				errosJ1++;
-			}
-			if(errosJ2 == 8){
-				pontosJ1++;
-				alert("Jogador 2 perdeu!");
-				pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
-				pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
-				errosJ1 = 0;
-				errosJ2 = 0;
-				for(let i = 0; i < player1Square.length; i++){
-					player1Square[i].innerHTML = '';
-					player2Square[i].innerHTML = '';
-				}
-			}
-			else if(errosJ1 == 8){
-				pontosJ2++;
-				alert("Jogador 1 perdeu!");
-				pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
-				pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
-				errosJ1 = 0;
-				errosJ2 = 0;
-				for(let i = 0; i < player1Square.length; i++){
-					player1Square[i].innerHTML = '';
-					player2Square[i].innerHTML = '';
-				}
-			}
-			showWord.innerHTML = '';
-		}
-
-				function finish(){
-						if(showWord.innerHTML !== '' && player1.classList.contains('pulse')){
-								let searchResult = jogadores.findIndex((item)=>{
-									if(item.nome == showWord.innerHTML.toLowerCase() || 
-										item.sobrenome == showWord.innerHTML.toLowerCase()){
-										return true;
-									}else{
-											return false;
-									}
-								});
-									if(searchResult > -1){
-										let audio = new Audio('assets/audio/applause3.mp3');
-										audio.play();
-										imagePanel.style.display = 'flex';
-										playerName.innerHTML = `Nome: ${jogadores[searchResult].nome} ${jogadores[searchResult].sobrenome}`;
-										playerClub.innerHTML = `Clube: ${jogadores[searchResult].clube}`;
-										if(jogadores[searchResult].img !== undefined){
-											playerImg.src = jogadores[searchResult].img;
-										}else{
-											playerImg.src = 'assets/images/anonimo.jpg';
-										}
-										nomesExcluidos.push(`${jogadores[searchResult].nome} ${jogadores[searchResult].sobrenome}`);
-										deletedNames.innerHTML = '';
-										for(let i = 0; i < nomesExcluidos.length; i++){
-											deletedNames.innerHTML += `${nomesExcluidos[i]}<br>`;
-										}
-										jogadores.splice(searchResult,1);
-									}else{
-										let audio = new Audio('assets/audio/erro.mp3');
-										audio.play();
-										imagePanel.style.display = 'none';
-										player1Square[errosJ1].innerHTML = perdeu[errosJ1];
-										errosJ1++;
-									}
-								}else if(showWord.innerHTML !== '' && player2.classList.contains('pulse')){
-									let searchResult = jogadores.findIndex((item)=>{
-										if(item.nome == showWord.innerHTML.toLowerCase() || 
-											item.sobrenome == showWord.innerHTML.toLowerCase()){
-											return true;
-										}else{
-											return false;
-										}
-									});
-										if(searchResult > -1){
-											let audio = new Audio('assets/audio/applause3.mp3');
-											audio.play();
-											imagePanel.style.display = 'flex';
-											playerName.innerHTML = `Nome: ${jogadores[searchResult].nome} ${jogadores[searchResult].sobrenome}`;
-											playerClub.innerHTML = `Clube: ${jogadores[searchResult].clube}`;
-											if(jogadores[searchResult].img !== undefined){
-											playerImg.src = jogadores[searchResult].img;
-										}else{
-												playerImg.src = 'assets/images/anonimo.jpg';
-										}
-										nomesExcluidos.push(`${jogadores[searchResult].nome} ${jogadores[searchResult].sobrenome}`);
-										deletedNames.innerHTML = '';
-										for(let i = 0; i < nomesExcluidos.length; i++){
-											deletedNames.innerHTML += `${nomesExcluidos[i]}<br>`;
-										}
-											jogadores.splice(searchResult,1);
-									}else{
-										let audio = new Audio('assets/audio/erro.mp3');
-										audio.play();
-										imagePanel.style.display = 'none';
-										player2Square[errosJ2].innerHTML = perdeu[errosJ2];
-										errosJ2++;
-									}
-								}else{
-									//Colocar um audio de aviso
-									alert('Jogador 1 ou  jogador 2 não preencheu nenhuma letra!');
-								}
-								if(errosJ2 == 8){
-									pontosJ1++;
-									alert("Jogador 2 perdeu!");
-									pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
-									pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
-									errosJ1 = 0;
-									errosJ2 = 0;
-									for(let i = 0; i < player1Square.length; i++){
-										player1Square[i].innerHTML = '';
-										player2Square[i].innerHTML = '';
-									}
-								}
-									else if(errosJ1 == 8){
-										pontosJ2++;
-										alert("Jogador 1 perdeu!");
-										pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
-										pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
-										errosJ1 = 0;
-										errosJ2 = 0;
-										for(let i = 0; i < player1Square.length; i++){
-											player1Square[i].innerHTML = '';
-											player2Square[i].innerHTML = '';
-										}
-									}
-								showWord.innerHTML = '';
-						}
-
-startGame.addEventListener('click',()=>{
+function inicia(){
 	playing = true;
 	let category = document.querySelector('#category');
 	let play = document.querySelector('#play');
@@ -369,4 +132,279 @@ startGame.addEventListener('click',()=>{
 		alert('Escolha uma categoria válida!');
 	}
 	typedLetter.focus();
-});
+}
+
+function playFunction(){
+	if(player1.classList.contains('pulse')){
+			if(typedLetter.value !== ''){
+				showWord.innerHTML += `${typedLetter.value.toUpperCase()}`;
+				player1.classList.remove('pulse');
+				player2.classList.add('pulse');
+				typedLetter.value = '';
+			}else{
+				alert('O jogador 1 precisa digitar alguma letra');
+			}
+	}else if(player2.classList.contains('pulse')){
+		if(typedLetter.value !== ''){
+			showWord.innerHTML += `${typedLetter.value.toUpperCase()}`;
+			player2.classList.remove('pulse');
+			player1.classList.add('pulse');
+			typedLetter.value = '';
+		}else{
+			alert('O jogador 2 precisa digitar alguma letra');
+		}
+	}
+			typedLetter.focus();
+		}
+		function interroga1(){
+			let promptText = prompt("J2, digite as restantes letras");
+			let validation = `${showWord.innerHTML}${promptText}`;
+			let searchResultInt1 = jog.findIndex((item)=>{
+				if(item.nome == validation.toLowerCase() || item.sobrenome == validation.toLowerCase()){
+					return true;
+				}else{
+					return false;
+				}
+			});
+			if(searchResultInt1 > -1){
+				player1Square[errosJ1].innerHTML = perdeu[errosJ1];
+				errosJ1++;
+				let audio = new Audio('assets/audio/applause3.mp3');
+				audio.play();
+				imagePanel.style.display = 'flex';
+				playerName.innerHTML = `Nome: ${jog[searchResultInt1].nome} ${jog[searchResultInt1].sobrenome}`;
+				playerClub.innerHTML = `Clube: ${jog[searchResultInt1].clube}`;
+				if(jog[searchResultInt1].img !== undefined){
+					playerImg.src = jog[searchResultInt1].img;
+				}else{
+					playerImg.src = 'assets/images/anonimo.jpg';
+				}
+				nomesExcluidos.push(`${jog[searchResultInt1].nome} ${jog[searchResultInt1].sobrenome}`);
+				deletedNames.innerHTML = '';
+				nomesExcluidos.sort();
+				for(let i = 0; i < nomesExcluidos.length; i++){
+					deletedNames.innerHTML += `${nomesExcluidos[i]}<br>`;
+				}
+				jog.splice(searchResultInt1,1);
+			}else{
+				let audio = new Audio('assets/audio/erro.mp3');
+				audio.play();
+				imagePanel.style.display = 'none';
+				player2Square[errosJ2].innerHTML = perdeu[errosJ2];
+				errosJ2++;
+			}
+			if(errosJ2 == 8){
+				pontosJ1++;
+				alert('j2 perdeu!');
+				pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
+				pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
+				errosJ1 = 0;
+				errosJ2 = 0;
+				nomesExcluidos = [];
+				deletedNames.innerHTML = '';
+				jogadoresCopy();
+
+				for(let i = 0; i < player1Square.length; i++){
+					player1Square[i].innerHTML = '';
+					player2Square[i].innerHTML = '';
+				}
+			}
+			else if(errosJ1 == 8){
+				pontosJ2++;
+				alert("Jogador 1 perdeu!");
+				pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
+				pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
+				errosJ1 = 0;
+				errosJ2 = 0;
+				nomesExcluidos = [];
+				deletedNames.innerHTML = '';
+				jogadoresCopy();
+
+				for(let i = 0; i < player1Square.length; i++){
+					player1Square[i].innerHTML = '';
+					player2Square[i].innerHTML = '';
+				}
+			}
+			showWord.innerHTML = '';
+		}
+		function interroga2(){
+			let promptText = prompt("J1, digite as restantes letras");
+			let validation = `${showWord.innerHTML}${promptText}`;
+			let searchResultInt2 = jog.findIndex((item)=>{
+				if(item.nome == validation.toLowerCase() || item.sobrenome == validation.toLowerCase()){
+					return true;
+				}else{
+					return false;
+				}
+			});
+			if(searchResultInt2 > -1){
+			player2Square[errosJ2].innerHTML = perdeu[errosJ2];
+			errosJ2++;
+			let audio = new Audio('assets/audio/applause3.mp3');
+			audio.play();
+			imagePanel.style.display = 'flex';
+			playerName.innerHTML = `Nome: ${jog[searchResultInt2].nome} ${jog[searchResultInt2].sobrenome}`;
+			playerClub.innerHTML = `Clube: ${jog[searchResultInt2].clube}`;
+			if(jog[searchResultInt2].img !== undefined){
+				playerImg.src = jog[searchResultInt2].img;
+			}else{
+				playerImg.src = 'assets/images/anonimo.jpg';
+			}
+			nomesExcluidos.push(`${jog[searchResultInt2].nome} ${jog[searchResultInt2].sobrenome}`);
+				deletedNames.innerHTML = '';
+				nomesExcluidos.sort();
+				for(let i = 0; i < nomesExcluidos.length; i++){
+					deletedNames.innerHTML += `${nomesExcluidos[i]}<br>`;
+				}
+				jog.splice(searchResultInt2,1);
+			}else{
+				let audio = new Audio('assets/audio/erro.mp3');
+				audio.play();
+				imagePanel.style.display = 'none';
+				player1Square[errosJ1].innerHTML = perdeu[errosJ1];
+				errosJ1++;
+			}
+			if(errosJ2 == 8){
+				pontosJ1++;
+				alert("Jogador 2 perdeu!");
+				pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
+				pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
+				errosJ1 = 0;
+				errosJ2 = 0;
+				nomesExcluidos = [];
+				deletedNames.innerHTML = '';
+				jogadoresCopy();
+
+				for(let i = 0; i < player1Square.length; i++){
+					player1Square[i].innerHTML = '';
+					player2Square[i].innerHTML = '';
+				}
+			}
+			else if(errosJ1 == 8){
+				pontosJ2++;
+				alert("Jogador 1 perdeu!");
+				pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
+				pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
+				errosJ1 = 0;
+				errosJ2 = 0;
+				nomesExcluidos = [];
+				deletedNames.innerHTML = '';
+				jogadoresCopy();
+
+				for(let i = 0; i < player1Square.length; i++){
+					player1Square[i].innerHTML = '';
+					player2Square[i].innerHTML = '';
+				}
+			}
+			showWord.innerHTML = '';
+		}
+
+				function finish(){
+						if(showWord.innerHTML !== '' && player1.classList.contains('pulse')){
+								let searchResult = jog.findIndex((item)=>{
+									if(item.nome == showWord.innerHTML.toLowerCase() || 
+										item.sobrenome == showWord.innerHTML.toLowerCase()){
+										return true;
+									}else{
+											return false;
+									}
+								});
+									if(searchResult > -1){
+										let audio = new Audio('assets/audio/applause3.mp3');
+										audio.play();
+										imagePanel.style.display = 'flex';
+										playerName.innerHTML = `Nome: ${jog[searchResult].nome} ${jog[searchResult].sobrenome}`;
+										playerClub.innerHTML = `Clube: ${jog[searchResult].clube}`;
+										if(jog[searchResult].img !== undefined){
+											playerImg.src = jog[searchResult].img;
+										}else{
+											playerImg.src = 'assets/images/anonimo.jpg';
+										}
+										nomesExcluidos.push(`${jog[searchResult].nome} ${jog[searchResult].sobrenome}`);
+										deletedNames.innerHTML = '';
+										nomesExcluidos.sort();
+										for(let i = 0; i < nomesExcluidos.length; i++){
+											deletedNames.innerHTML += `${nomesExcluidos[i]}<br>`;
+										}
+										jog.splice(searchResult,1);
+									}else{
+										let audio = new Audio('assets/audio/erro.mp3');
+										audio.play();
+										imagePanel.style.display = 'none';
+										player1Square[errosJ1].innerHTML = perdeu[errosJ1];
+										errosJ1++;
+									}
+								}else if(showWord.innerHTML !== '' && player2.classList.contains('pulse')){
+									let searchResult = jog.findIndex((item)=>{
+										if(item.nome == showWord.innerHTML.toLowerCase() || 
+											item.sobrenome == showWord.innerHTML.toLowerCase()){
+											return true;
+										}else{
+											return false;
+										}
+									});
+										if(searchResult > -1){
+											let audio = new Audio('assets/audio/applause3.mp3');
+											audio.play();
+											imagePanel.style.display = 'flex';
+											playerName.innerHTML = `Nome: ${jog[searchResult].nome} ${jog[searchResult].sobrenome}`;
+											playerClub.innerHTML = `Clube: ${jog[searchResult].clube}`;
+											if(jog[searchResult].img !== undefined){
+											playerImg.src = jog[searchResult].img;
+										}else{
+												playerImg.src = 'assets/images/anonimo.jpg';
+										}
+										nomesExcluidos.push(`${jog[searchResult].nome} ${jog[searchResult].sobrenome}`);
+										deletedNames.innerHTML = '';
+										nomesExcluidos.sort();
+										for(let i = 0; i < nomesExcluidos.length; i++){
+											deletedNames.innerHTML += `${nomesExcluidos[i]}<br>`;
+										}
+											jog.splice(searchResult,1);
+									}else{
+										let audio = new Audio('assets/audio/erro.mp3');
+										audio.play();
+										imagePanel.style.display = 'none';
+										player2Square[errosJ2].innerHTML = perdeu[errosJ2];
+										errosJ2++;
+									}
+								}else{
+									//Colocar um audio de aviso
+									alert('Jogador 1 ou  jogador 2 não preencheu nenhuma letra!');
+								}
+								if(errosJ2 == 8){
+									pontosJ1++;
+									alert("Jogador 2 perdeu!");
+									pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
+									pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
+									errosJ1 = 0;
+									errosJ2 = 0;
+									nomesExcluidos = [];
+									deletedNames.innerHTML = '';
+									jogadoresCopy();
+
+									for(let i = 0; i < player1Square.length; i++){
+										player1Square[i].innerHTML = '';
+										player2Square[i].innerHTML = '';
+									}
+								}
+									else if(errosJ1 == 8){
+										pontosJ2++;
+										alert("Jogador 1 perdeu!");
+										pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
+										pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
+										errosJ1 = 0;
+										errosJ2 = 0;
+										nomesExcluidos = [];
+										deletedNames.innerHTML = '';
+										jogadoresCopy();
+
+										for(let i = 0; i < player1Square.length; i++){
+											player1Square[i].innerHTML = '';
+											player2Square[i].innerHTML = '';
+										}
+									}
+								showWord.innerHTML = '';
+						}
+
+	startGame.addEventListener('click', inicia);
