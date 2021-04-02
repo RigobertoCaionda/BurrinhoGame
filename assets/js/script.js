@@ -16,6 +16,7 @@ let pontosJ1 = 0;
 let pontosJ2 = 0;
 let nomesExcluidos = [];
 let deletedNames = document.querySelector('.deletedNames');
+let deletedNamesId = document.querySelector('#deletedNames');
 let pontuacaoJ1 = document.querySelector('#pontuacaoJ1');
 let pontuacaoJ2 = document.querySelector('#pontuacaoJ2');
 let jog;//copia do jogador
@@ -408,3 +409,14 @@ function playFunction(){
 						}
 
 	startGame.addEventListener('click', inicia);
+	deletedNamesId.addEventListener('click',()=>{
+		if(playing){
+			if(deletedNames.classList.contains('showNames')){
+				deletedNames.classList.remove('showNames');
+			}else{
+				deletedNames.classList.add('showNames');
+			}
+		}else{
+			alert('Inicie o jogo primeiro!');
+		}
+	});
