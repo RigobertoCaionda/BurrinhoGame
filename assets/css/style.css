@@ -241,9 +241,6 @@ body{
 	    line-height: 25px;
 	    font-size: 1.3rem;
 	}
-	.image-panel {
-    	background-color: rgba(0,0,0,.4);
-	}
 	.controls span {
 	    font-size: 0.8rem;
 	}
@@ -287,7 +284,6 @@ body{
 @media(max-width: 374px){
 	.table{
 		flex-direction: column;
-		justify-content: flex-start;
 		padding:0;
 	}
 	.right-interface{
