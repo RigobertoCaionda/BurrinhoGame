@@ -224,7 +224,6 @@ body{
 @media(min-width: 375px) and (max-width: 425px){
 	.table{
 		flex-direction: column;
-		justify-content: flex-start;
 		padding:0;
 	}
 	.right-interface{
@@ -242,6 +241,9 @@ body{
 	    line-height: 25px;
 	    font-size: 1.3rem;
 	}
+	.image-panel {
+    background-color: blue;
+}
 	.controls span {
 	    font-size: 0.8rem;
 	}
