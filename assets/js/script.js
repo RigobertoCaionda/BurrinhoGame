@@ -116,6 +116,12 @@ function inicia(){
 				let player = document.querySelector('#player2');
 				let interrogaPC = document.querySelector('#question-mark-j1');
 				let interrogaJ = document.querySelector('#question-mark-j2');
+				let spanPC = document.querySelector('.player1 span');
+				let spanJ = document.querySelector('.player2 span');
+				pontuacaoJ1.innerHTML = "pontuação PC: <span style='color:red;'>0</span>";
+				pontuacaoJ2.innerHTML = "pontuação J: <span style='color:red;'>0</span>";
+				spanPC.innerHTML = 'Comput';
+				spanJ.innerHTML = 'Jogador';
 				pc.innerHTML = 'PC';
 				player.innerHTML = 'J';
 				if(playing){
