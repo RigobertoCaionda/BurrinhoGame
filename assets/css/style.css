@@ -242,8 +242,8 @@ body{
 	    font-size: 1.3rem;
 	}
 	.image-panel {
-    background-color: blue;
-}
+    	background-color: rgba(0,0,0,.4);
+	}
 	.controls span {
 	    font-size: 0.8rem;
 	}
