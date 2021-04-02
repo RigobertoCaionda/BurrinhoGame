@@ -161,6 +161,9 @@ body{
 .show-words{
 	margin-top: 10px;
 	font-weight: bold;
+	padding:20px;
+	width: 100%;
+	text-align: center;
 }
 .pulse{
 	animation-name: pulse;
