@@ -131,7 +131,7 @@ function inicia(){
 							player.classList.remove('pulse');
 						}
 						pc.classList.add('pulse');
-						playFunctionPC();//Quando o pc inicia ele ja chama a funcao playFunction
+						setTimeout(playFunctionPC, 2000);//Quando o pc inicia ele ja chama a funcao playFunction
 					}else if(playerStart == '1'){
 						if(pc.classList.contains('pulse')){
 							pc.classList.remove('pulse');
@@ -232,7 +232,7 @@ function playFunction(){
 								player.classList.add('pulse');
 							}else{
 								finishPC();
-									playFunctionPC();//Muito massa, foi dificil
+									setTimeout(playFunctionPC, 2000);//Muito massa, foi dificil
 							}
 						}else if(resPC > -1 && jog[resPC].sobrenome.startsWith(showWord.innerHTML.toLowerCase())){
 							if(showWord.innerHTML.length < jog[resPC].sobrenome.length){
@@ -241,14 +241,14 @@ function playFunction(){
 								player.classList.add('pulse');
 							}else{
 								finishPC();
-									playFunctionPC();//Muito massa, foi dificil
+									setTimeout(playFunctionPC, 2000);//Muito massa, foi dificil
 							}
 
 						}else{
 							if(pc.classList.contains('pulse')){//Tlavez nao seja necessario
 							if(showWord.innerHTML !== ''){
 								interroga1PC();
-								playFunctionPC();//Ver isso
+								setTimeout(playFunctionPC, 2000);//Ver isso
 							}else{//O else tmbm nao
 								//efeitos sonoro para aviso
 								alert('Formem o nome de um jogador primero!');
@@ -278,7 +278,7 @@ function playFunction(){
 			player.classList.remove('pulse');
 			pc.classList.add('pulse');
 			typedLetter.value = '';
-			playFunctionPC();
+			setTimeout(playFunctionPC, 2000);
 		}else{
 			alert('O jogador 2 precisa digitar alguma letra');
 		}
