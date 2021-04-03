@@ -21,5 +21,75 @@ let jogadores = [
 			nome: 'bernardo',
 			sobrenome: 'silva',
 			clube: 'manchester city'
-		}
+		},
+		{
+			nome: 'david',
+			sobrenome: 'alaba',
+			clube: 'bayern munchen',
+		},
+		{
+			nome: 'luis',
+			sobrenome: 'suarez',
+			clube: 'atlético de madrid',
+		},
+		{
+			nome: 'sergio',
+			sobrenome: 'aguero',
+			clube: 'manchester city',
+		},
+		{
+			nome: 'paul',
+			sobrenome: 'pogba',
+			clube: 'manchester united',
+		},
+		{
+			nome: 'francisco',
+			sobrenome: 'trincão',
+			clube: 'barcelona',
+		},
+		{
+			nome: 'bruno',
+			sobrenome: 'fernandes',
+			clube: 'manchester united',
+		},
+		{
+			nome: 'kylian',
+			sobrenome: 'mbappé',
+			clube: 'paris saint germain',
+		},
+		{
+			nome: 'neymar',
+			sobrenome: 'júnior',
+			clube: 'paris saint germain',
+		},
+		{
+			nome: 'romelu',
+			sobrenome: 'lukaku',
+			clube: 'inter do milão',
+		},
+		{
+			nome: 'zlatan',
+			sobrenome: 'ibrahimovic',
+			clube: 'ac milan',
+		},
+		{
+			nome: 'kevin',
+			sobrenome: 'de bruyne',
+			clube: 'manchester city',
+		},
+		{
+			nome: 'paulo',
+			sobrenome: 'dybala',
+			clube: 'juventus',
+		},
+		{
+			nome: 'marc',
+			sobrenome: 'stegen',
+			clube: 'manchester united',
+		},
+		{
+			nome: 'gabriel',
+			sobrenome: 'jesus',
+			clube: 'manchester city',
+		},
 ];

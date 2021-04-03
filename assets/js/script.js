@@ -139,9 +139,6 @@ function inicia(){
 						player.classList.add('pulse');
 					}//Parei aqui
 					play.addEventListener('click', playFunctionPC);
-					interrogaPC.addEventListener('click',()=>{
-						//Codigo de interrogar do pc
-					});
 					interrogaJ.addEventListener('click',()=>{
 						if(player.classList.contains('pulse')){
 							if(showWord.innerHTML !== ''){
@@ -168,7 +165,6 @@ function inicia(){
 						}
 					});
 				}
-					//regras para computador
 				break;
 			}
 		break;
@@ -227,7 +223,13 @@ function playFunction(){
 						});
 						if(resPC > -1 && jog[resPC].nome.startsWith(showWord.innerHTML.toLowerCase())){
 							if(showWord.innerHTML.length < jog[resPC].nome.length){
-								showWord.innerHTML += jog[resPC].nome[showWord.innerHTML.length].toUpperCase();
+								let letras = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','W','X','Y','Z'];
+								let letraAleatoria = Math.floor(Math.random() * letras.length);
+								let letrasPosicaoI = letras[letraAleatoria];
+								let arrayOpcoes = [jog[resPC].nome[showWord.innerHTML.length], letrasPosicaoI];
+								let zeroUm = Math.floor(Math.random() * arrayOpcoes.length);
+								let nomePosicaoI = arrayOpcoes[zeroUm];
+								showWord.innerHTML += nomePosicaoI.toUpperCase();
 								pc.classList.remove('pulse');
 								player.classList.add('pulse');
 							}else{
@@ -355,6 +357,20 @@ function playFunction(){
 					player2Square[i].innerHTML = '';
 				}
 			}
+			if(jog.length == 0){
+				alert('Jogo Empatado!');
+				errosJ1 = 0;
+				errosJ2 = 0;
+				nomesExcluidos = [];
+				deletedNames.innerHTML = '';
+				jogadoresCopy();
+
+				for(let i = 0; i < player1Square.length; i++){
+					player1Square[i].innerHTML = '';
+					player2Square[i].innerHTML = '';
+				}
+
+			}
 			showWord.innerHTML = '';
 		}
 
@@ -427,10 +443,23 @@ function playFunction(){
 					player2Square[i].innerHTML = '';
 				}
 			}
+			if(jog.length == 0){
+				alert('Jogo Empatado!');
+				errosJ1 = 0;
+				errosJ2 = 0;
+				nomesExcluidos = [];
+				deletedNames.innerHTML = '';
+				jogadoresCopy();
+
+				for(let i = 0; i < player1Square.length; i++){
+					player1Square[i].innerHTML = '';
+					player2Square[i].innerHTML = '';
+				}
+
+			}
 			showWord.innerHTML = '';
 		}
 		function interroga2J(){
-			//let promptText = prompt("computador, digite as restantes letras");
 			let indice = jog.findIndex((item)=>{
 				if(item.nome.startsWith(showWord.innerHTML.toLowerCase()) || item.sobrenome.startsWith(showWord.innerHTML.toLowerCase())){
 								return true;
@@ -444,8 +473,7 @@ function playFunction(){
 			}else if(indice > -1 && jog[indice].sobrenome.startsWith(showWord.innerHTML.toLowerCase())){
 				promptText = jog[indice].sobrenome;
 			}else{
-				//Se o indice na bater com essas condicoes. Posso colocar combinacao de caracteres para dificultar
-				promptText = '12aaaa3333222cccfdffdf====+++++llllnncvdfksdc...//.ccdf';//Para nao dar match
+				promptText = '';
 			}
 			let validation = `${promptText}`;
 			let searchResultInt2 = jog.findIndex((item)=>{
@@ -513,6 +541,20 @@ function playFunction(){
 					player1Square[i].innerHTML = '';
 					player2Square[i].innerHTML = '';
 				}
+			}
+			if(jog.length == 0){
+				alert('Jogo Empatado!');
+				errosJ1 = 0;
+				errosJ2 = 0;
+				nomesExcluidos = [];
+				deletedNames.innerHTML = '';
+				jogadoresCopy();
+
+				for(let i = 0; i < player1Square.length; i++){
+					player1Square[i].innerHTML = '';
+					player2Square[i].innerHTML = '';
+				}
+
 			}
 			showWord.innerHTML = '';
 		}
@@ -584,6 +626,20 @@ function playFunction(){
 					player1Square[i].innerHTML = '';
 					player2Square[i].innerHTML = '';
 				}
+			}
+			if(jog.length == 0){
+				alert('Jogo Empatado!');
+				errosJ1 = 0;
+				errosJ2 = 0;
+				nomesExcluidos = [];
+				deletedNames.innerHTML = '';
+				jogadoresCopy();
+
+				for(let i = 0; i < player1Square.length; i++){
+					player1Square[i].innerHTML = '';
+					player2Square[i].innerHTML = '';
+				}
+
 			}
 			showWord.innerHTML = '';
 		}
@@ -693,6 +749,20 @@ function playFunction(){
 											player2Square[i].innerHTML = '';
 										}
 									}
+									if(jog.length == 0){
+									alert('Jogo Empatado!');
+									errosJ1 = 0;
+									errosJ2 = 0;
+									nomesExcluidos = [];
+									deletedNames.innerHTML = '';
+									jogadoresCopy();
+
+									for(let i = 0; i < player1Square.length; i++){
+										player1Square[i].innerHTML = '';
+										player2Square[i].innerHTML = '';
+									}
+
+								}
 								showWord.innerHTML = '';
 						}
 
@@ -788,25 +858,38 @@ function playFunction(){
 										player1Square[i].innerHTML = '';
 										player2Square[i].innerHTML = '';
 									}
-								}
-									else if(errosJ1 == 8){
-										pontosJ2++;
-										alert("Jogador venceu!");
-										pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:#f00'>${pontosJ1}pt</span>`;
-										pontuacaoJ2.innerHTML = `pontuação J: <span style='color:#f00'>${pontosJ2}pt</span>`;
-										errosJ1 = 0;
-										errosJ2 = 0;
-										nomesExcluidos = [];
-										deletedNames.innerHTML = '';
-										jogadoresCopy();
+								}else if(errosJ1 == 8){
+									pontosJ2++;
+									alert("Jogador venceu!");
+									pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:#f00'>${pontosJ1}pt</span>`;
+									pontuacaoJ2.innerHTML = `pontuação J: <span style='color:#f00'>${pontosJ2}pt</span>`;
+									errosJ1 = 0;
+									errosJ2 = 0;
+									nomesExcluidos = [];
+									deletedNames.innerHTML = '';
+									jogadoresCopy();
 
-										for(let i = 0; i < player1Square.length; i++){
-											player1Square[i].innerHTML = '';
-											player2Square[i].innerHTML = '';
-										}
+									for(let i = 0; i < player1Square.length; i++){
+										player1Square[i].innerHTML = '';
+										player2Square[i].innerHTML = '';
 									}
-								showWord.innerHTML = '';
-						}
+								}
+								if(jog.length == 0){
+									alert('Jogo Empatado!');
+													errosJ1 = 0;
+													errosJ2 = 0;
+													nomesExcluidos = [];
+													deletedNames.innerHTML = '';
+													jogadoresCopy();
+
+													for(let i = 0; i < player1Square.length; i++){
+														player1Square[i].innerHTML = '';
+														player2Square[i].innerHTML = '';
+													}
+
+											}
+											showWord.innerHTML = '';
+									}
 
 	startGame.addEventListener('click', inicia);
 	deletedNamesId.addEventListener('click',()=>{
