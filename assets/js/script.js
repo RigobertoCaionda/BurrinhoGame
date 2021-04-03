@@ -223,7 +223,10 @@ function playFunction(){
 						});
 						if(resPC > -1 && jog[resPC].nome.startsWith(showWord.innerHTML.toLowerCase())){
 							if(showWord.innerHTML.length < jog[resPC].nome.length){
-								let letras = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','W','X','Y','Z'];
+								let abecedario = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+								let position = Math.floor(Math.random() * abecedario.length);
+								let letraIncorreta = abecedario[position];
+								let letras = [jog[resPC].nome[showWord.innerHTML.length],letraIncorreta,jog[resPC].nome[showWord.innerHTML.length]];//Posso criar outro array para nao ser so A
 								let letraAleatoria = Math.floor(Math.random() * letras.length);
 								let letrasPosicaoI = letras[letraAleatoria];
 								let arrayOpcoes = [jog[resPC].nome[showWord.innerHTML.length], letrasPosicaoI];
@@ -891,7 +894,13 @@ function playFunction(){
 											showWord.innerHTML = '';
 									}
 
-	startGame.addEventListener('click', inicia);
+	startGame.addEventListener('click', ()=>{
+		if(playing){
+			alert('O jogo já começou!');
+		}else{
+			inicia();
+		}
+	});
 	deletedNamesId.addEventListener('click',()=>{
 		if(playing){
 			if(deletedNames.classList.contains('showNames')){

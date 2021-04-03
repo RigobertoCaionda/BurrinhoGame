@@ -44,7 +44,7 @@ let jogadores = [
 		},
 		{
 			nome: 'francisco',
-			sobrenome: 'trincão',
+			sobrenome: 'trincao',
 			clube: 'barcelona',
 		},
 		{
@@ -54,12 +54,12 @@ let jogadores = [
 		},
 		{
 			nome: 'kylian',
-			sobrenome: 'mbappé',
+			sobrenome: 'mbappe',
 			clube: 'paris saint germain',
 		},
 		{
 			nome: 'neymar',
-			sobrenome: 'júnior',
+			sobrenome: 'junior',
 			clube: 'paris saint germain',
 		},
 		{
@@ -74,7 +74,7 @@ let jogadores = [
 		},
 		{
 			nome: 'kevin',
-			sobrenome: 'de bruyne',
+			sobrenome: 'bruyne',
 			clube: 'manchester city',
 		},
 		{
