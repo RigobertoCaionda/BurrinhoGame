@@ -417,12 +417,12 @@ function playFunction(){
 			player.classList.remove('pulse');
 			pc.classList.add('pulse');
 			typedLetter.value = '';
+			clearInterval(time);
+			temporizador();
 			setTimeout(playFunctionPC, 2000);
 		}else{
 			alert('O jogador 2 precisa digitar alguma letra');
 		}
-		clearInterval(time);
-		temporizador();
 	}
 			typedLetter.focus();
 		}
