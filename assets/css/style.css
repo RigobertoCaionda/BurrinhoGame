@@ -225,13 +225,11 @@ body{
 	display: block;
 }
 .showTime{
-	position: absolute;
 	width: 60px;
 	height: 60px;
 	border:2px solid #fff;
 	border-radius: 50%;
 	color: black;
-	left:50%;
 	line-height: 60px;
 	text-align: center;
 	font-size: 2rem;
@@ -294,10 +292,6 @@ body{
 #question-mark-j1, #question-mark-j2 {
     width: 25px;
     height: 27px;
-}
-.showTime{
-	left:8%;
-	top: 40%;
 }
 }
 
@@ -365,9 +359,5 @@ body{
 #question-mark-j1, #question-mark-j2 {
     width: 25px;
     height: 27px;
-}
-.showTime{
-	left:5%;
-	top: 40%;
 }
 }
