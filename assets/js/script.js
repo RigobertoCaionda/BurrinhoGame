@@ -19,7 +19,12 @@ let deletedNames = document.querySelector('.deletedNames');
 let deletedNamesId = document.querySelector('#deletedNames');
 let pontuacaoJ1 = document.querySelector('#pontuacaoJ1');
 let pontuacaoJ2 = document.querySelector('#pontuacaoJ2');
+let player1;
+let player2;
+let pc;
+let player;
 let jog;//copia do jogador
+let time;
 function jogadoresCopy(){
 	jog = jogadores.map((item)=>{
 		return item;
@@ -28,6 +33,129 @@ function jogadoresCopy(){
 }
 jogadoresCopy();//
 
+function temporizador(){
+	let count = 15;
+	let showTime = document.querySelector('.showTime');
+	let modeValue = mode.options[mode.selectedIndex].value;
+	time = setInterval(()=>{ 
+				showTime.innerHTML = count;
+				count--;
+				if(count < 0){
+					clearInterval(time);
+					if(modeValue == 'amigo'){
+						if(player1.classList.contains('pulse')){
+							let audio = new Audio('assets/audio/erro.mp3');
+							audio.play();
+							imagePanel.style.display = 'none';
+							player1Square[errosJ1].innerHTML = perdeu[errosJ1];
+							errosJ1++;
+							showWord.innerHTML = '';
+							player1.classList.remove('pulse');
+							player2.classList.add('pulse');
+							temporizador();
+						}else if(player2.classList.contains('pulse')){
+							let audio = new Audio('assets/audio/erro.mp3');
+							audio.play();
+							imagePanel.style.display = 'none';
+							player2Square[errosJ2].innerHTML = perdeu[errosJ2];
+							errosJ2++;
+							showWord.innerHTML = '';
+							player2.classList.remove('pulse');
+							player1.classList.add('pulse');
+							temporizador();
+						}
+
+				if(errosJ2 == 8){
+						pontosJ1++;
+						alert("Jogador 2 perdeu!");
+						pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
+						pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
+						errosJ1 = 0;
+						errosJ2 = 0;
+						nomesExcluidos = [];
+						deletedNames.innerHTML = '';
+						jogadoresCopy();
+
+						for(let i = 0; i < player1Square.length; i++){
+							player1Square[i].innerHTML = '';
+							player2Square[i].innerHTML = '';
+						}
+					}else if(errosJ1 == 8){
+							pontosJ2++;
+							alert("Jogador 1 perdeu!");
+							pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
+							pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
+							errosJ1 = 0;
+							errosJ2 = 0;
+							nomesExcluidos = [];
+							deletedNames.innerHTML = '';
+							jogadoresCopy();
+
+							for(let i = 0; i < player1Square.length; i++){
+								player1Square[i].innerHTML = '';
+								player2Square[i].innerHTML = '';
+							}
+						}
+
+					}else if(modeValue == 'computador'){
+					if(pc.classList.contains('pulse')){
+							let audio = new Audio('assets/audio/erro.mp3');
+							audio.play();
+							imagePanel.style.display = 'none';
+							player1Square[errosJ1].innerHTML = perdeu[errosJ1];
+							errosJ1++;
+							showWord.innerHTML = '';//So para garantir, ele nunca deixa o tempo acabar
+							pc.classList.remove('pulse');
+							player.classList.add('pulse');
+							temporizador();
+						}else if(player.classList.contains('pulse')){
+							let audio = new Audio('assets/audio/erro.mp3');
+							audio.play();
+							imagePanel.style.display = 'none';
+							player2Square[errosJ2].innerHTML = perdeu[errosJ2];
+							errosJ2++;
+							showWord.innerHTML = '';
+							player.classList.remove('pulse');
+							pc.classList.add('pulse');
+							temporizador();
+							setTimeout(playFunctionPC,2000);
+						}
+
+				if(errosJ2 == 8){
+						pontosJ1++;
+						alert("Jogador 2 perdeu!");
+						pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
+						pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
+						errosJ1 = 0;
+						errosJ2 = 0;
+						nomesExcluidos = [];
+						deletedNames.innerHTML = '';
+						jogadoresCopy();
+
+						for(let i = 0; i < player1Square.length; i++){
+							player1Square[i].innerHTML = '';
+							player2Square[i].innerHTML = '';
+						}
+					}else if(errosJ1 == 8){
+							pontosJ2++;
+							alert("Jogador 1 perdeu!");
+							pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
+							pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
+							errosJ1 = 0;
+							errosJ2 = 0;
+							nomesExcluidos = [];
+							deletedNames.innerHTML = '';
+							jogadoresCopy();
+
+							for(let i = 0; i < player1Square.length; i++){
+								player1Square[i].innerHTML = '';
+								player2Square[i].innerHTML = '';
+							}
+						}
+					}
+				}
+			},1000);
+}
 function inicia(){
 	playing = true;
 	let category = document.querySelector('#category');
@@ -52,8 +180,8 @@ function inicia(){
 			switch(modeValue){
 				case 'amigo':
 				//regras para amigo
-				let player1 = document.querySelector('#player1');
-				let player2 = document.querySelector('#player2');
+				player1 = document.querySelector('#player1');
+				player2 = document.querySelector('#player2');
 				let interrogaJ1 = document.querySelector('#question-mark-j1');
 				let interrogaJ2 = document.querySelector('#question-mark-j2');
 				if(playing){
@@ -112,8 +240,8 @@ function inicia(){
 				}
 				break;
 				case 'computador':
-				let pc = document.querySelector('#player1');
-				let player = document.querySelector('#player2');
+				pc = document.querySelector('#player1');
+				player = document.querySelector('#player2');
 				let interrogaPC = document.querySelector('#question-mark-j1');
 				let interrogaJ = document.querySelector('#question-mark-j2');
 				let spanPC = document.querySelector('.player1 span');
@@ -193,6 +321,8 @@ function playFunction(){
 				player1.classList.remove('pulse');
 				player2.classList.add('pulse');
 				typedLetter.value = '';
+				clearInterval(time);
+				temporizador();
 			}else{
 				alert('O jogador 1 precisa digitar alguma letra');
 			}
@@ -202,6 +332,8 @@ function playFunction(){
 			player2.classList.remove('pulse');
 			player1.classList.add('pulse');
 			typedLetter.value = '';
+			clearInterval(time);
+			temporizador();
 		}else{
 			alert('O jogador 2 precisa digitar alguma letra');
 		}
@@ -277,6 +409,8 @@ function playFunction(){
 						player.classList.add('pulse');
 						typedLetter.value = '';
 					}
+					clearInterval(time);
+					temporizador();
 	}else if(player.classList.contains('pulse')){
 		if(typedLetter.value !== ''){
 			showWord.innerHTML += `${typedLetter.value.toUpperCase()}`;
@@ -287,6 +421,8 @@ function playFunction(){
 		}else{
 			alert('O jogador 2 precisa digitar alguma letra');
 		}
+		clearInterval(time);
+		temporizador();
 	}
 			typedLetter.focus();
 		}
@@ -375,6 +511,8 @@ function playFunction(){
 
 			}
 			showWord.innerHTML = '';
+			clearInterval(time);
+			temporizador();
 		}
 
 		function interroga1PC(){
@@ -461,6 +599,8 @@ function playFunction(){
 
 			}
 			showWord.innerHTML = '';
+			clearInterval(time);
+			temporizador();
 		}
 		function interroga2J(){
 			let indice = jog.findIndex((item)=>{
@@ -560,6 +700,8 @@ function playFunction(){
 
 			}
 			showWord.innerHTML = '';
+			clearInterval(time);
+			temporizador();
 		}
 		function interroga2(){
 			let promptText = prompt("J1, digite as restantes letras");
@@ -645,6 +787,8 @@ function playFunction(){
 
 			}
 			showWord.innerHTML = '';
+			clearInterval(time);
+			temporizador();
 		}
 
 				function finish(){
@@ -682,6 +826,8 @@ function playFunction(){
 										player1Square[errosJ1].innerHTML = perdeu[errosJ1];
 										errosJ1++;
 									}
+									clearInterval(time);
+									temporizador();
 								}else if(showWord.innerHTML !== '' && player2.classList.contains('pulse')){
 									let searchResult = jog.findIndex((item)=>{
 										if(item.nome == showWord.innerHTML.toLowerCase() || 
@@ -716,6 +862,8 @@ function playFunction(){
 										player2Square[errosJ2].innerHTML = perdeu[errosJ2];
 										errosJ2++;
 									}
+									clearInterval(time);
+									temporizador();
 								}else{
 									//Colocar um audio de aviso
 									alert('Jogador 1 ou  jogador 2 não preencheu nenhuma letra!');
@@ -808,6 +956,8 @@ function playFunction(){
 										errosJ1++;
 								
 									}
+									clearInterval(time);
+									temporizador();
 								}else if(showWord.innerHTML !== '' && player.classList.contains('pulse')){
 									let searchResult = jog.findIndex((item)=>{
 										if(item.nome == showWord.innerHTML.toLowerCase() || 
@@ -842,6 +992,8 @@ function playFunction(){
 										player2Square[errosJ2].innerHTML = perdeu[errosJ2];
 										errosJ2++;
 									}
+									clearInterval(time);
+									temporizador();
 								}else{
 									//Colocar um audio de aviso
 									alert('Jogador  ou  pc não preencheu nenhuma letra!');
@@ -895,10 +1047,15 @@ function playFunction(){
 									}
 
 	startGame.addEventListener('click', ()=>{
-		if(playing){
+		let catValue = category.options[category.selectedIndex].value;
+		if(catValue == 'cantor'){
+			alert('categoria não disponivel no momento!');
+		}else if(playing){
 			alert('O jogo já começou!');
 		}else{
 			inicia();
+			
+			temporizador();
 		}
 	});
 	deletedNamesId.addEventListener('click',()=>{
