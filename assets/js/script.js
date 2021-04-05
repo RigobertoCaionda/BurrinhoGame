@@ -14,6 +14,18 @@ let player1Square = document.querySelectorAll('.player1 .little-square');
 let player2Square = document.querySelectorAll('.player2 .little-square');
 let pontosJ1 = 0;
 let pontosJ2 = 0;
+let pontosJ;
+if(localStorage.getItem('pointsJ') == null){
+	pontosJ = 0;
+}else{
+	pontosJ = localStorage.getItem('pointsJ');
+}
+let pontosPc;
+if(localStorage.getItem('pointsPc') == null){
+	pontosPc = 0;
+}else{
+	pontosPc = localStorage.getItem('pointsPc');
+}
 let nomesExcluidos = [];
 let deletedNames = document.querySelector('.deletedNames');
 let deletedNamesId = document.querySelector('#deletedNames');
@@ -25,13 +37,21 @@ let pc;
 let player;
 let jog;//copia do jogador
 let time;
+let username = 'Jogador2';
+if(localStorage.getItem('username') === null){//Preciso dar um jeito de fazer esse aqui ser lido primeiro que a variavel username
+	let nome_usuario = prompt('digite seu nome, vamos guardá-lo para a próxima vez!');
+	localStorage.setItem('username', nome_usuario);
+}else{
+	username = localStorage.getItem('username');
+}
+
 function jogadoresCopy(){
 	jog = jogadores.map((item)=>{
 		return item;
 	});
 	
 }
-jogadoresCopy();//
+jogadoresCopy();
 
 function temporizador(){
 	let count = 15;
@@ -122,10 +142,10 @@ function temporizador(){
 						}
 
 				if(errosJ2 == 8){
-						pontosJ1++;
-						alert("Jogador 2 perdeu!");
-						pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
-						pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
+						pontosPc++;
+						alert("Jogador venceu!");
+						pontuacaoJ1.innerHTML = `pontuação pc: <span style='color:#f00'>${pontosPc}pt</span>`;
+						pontuacaoJ2.innerHTML = `${username}: <span style='color:#f00'>${pontosJ}pt</span>`;
 						errosJ1 = 0;
 						errosJ2 = 0;
 						nomesExcluidos = [];
@@ -136,11 +156,13 @@ function temporizador(){
 							player1Square[i].innerHTML = '';
 							player2Square[i].innerHTML = '';
 						}
+						localStorage.setItem('pointsPc', pontosPc);
+						localStorage.setItem('pointsJ', pontosJ);
 					}else if(errosJ1 == 8){
-							pontosJ2++;
-							alert("Jogador 1 perdeu!");
-							pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosJ1}pt</span>`;
-							pontuacaoJ2.innerHTML = `pontuação J2: <span style='color:#f00'>${pontosJ2}pt</span>`;
+							pontosJ++;
+							alert("computador venceu!");
+							pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosPc}pt</span>`;
+							pontuacaoJ2.innerHTML = `${username}: <span style='color:#f00'>${pontosJ}pt</span>`;
 							errosJ1 = 0;
 							errosJ2 = 0;
 							nomesExcluidos = [];
@@ -151,6 +173,8 @@ function temporizador(){
 								player1Square[i].innerHTML = '';
 								player2Square[i].innerHTML = '';
 							}
+							localStorage.setItem('pointsPc', pontosPc);
+							localStorage.setItem('pointsJ', pontosJ);
 						}
 					}
 				}
@@ -246,10 +270,16 @@ function inicia(){
 				let interrogaJ = document.querySelector('#question-mark-j2');
 				let spanPC = document.querySelector('.player1 span');
 				let spanJ = document.querySelector('.player2 span');
-				pontuacaoJ1.innerHTML = "pontuação PC: <span style='color:red;'>0</span>";
-				pontuacaoJ2.innerHTML = "pontuação J: <span style='color:red;'>0</span>";
+				pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:red;'>${pontosPc}pt</span>`;
+				pontuacaoJ2.innerHTML = `${username}: <span style='color:red;'>${pontosJ}pt</span>`;
 				spanPC.innerHTML = 'Comput';
-				spanJ.innerHTML = 'Jogador';
+				let usernameSpan;
+				if(username == 'null' || username == ''){
+					usernameSpan = 'Jogador2';
+				}else{
+					usernameSpan = username.slice(0,8);
+				}
+				spanJ.innerHTML = `${usernameSpan}`;
 				pc.innerHTML = 'PC';
 				player.innerHTML = 'J';
 				if(playing){
@@ -421,7 +451,7 @@ function playFunction(){
 			temporizador();
 			setTimeout(playFunctionPC, 2000);
 		}else{
-			alert('O jogador 2 precisa digitar alguma letra');
+			alert(`O ${username} precisa digitar alguma letra`);
 		}
 	}
 			typedLetter.focus();
@@ -516,7 +546,7 @@ function playFunction(){
 		}
 
 		function interroga1PC(){
-			let promptText = prompt("Jogador, digite as restantes letras");
+			let promptText = prompt(`${username}, digite as restantes letras`);
 			let validation = `${showWord.innerHTML}${promptText}`;
 			let searchResultInt1 = jog.findIndex((item)=>{
 				if(item.nome == validation.toLowerCase() || item.sobrenome == validation.toLowerCase()){
@@ -553,10 +583,10 @@ function playFunction(){
 				errosJ2++;
 			}
 			if(errosJ2 == 8){
-				pontosJ1++;
+				pontosPc++;
 				alert('computador venceu!');
-				pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:#f00'>${pontosJ1}pt</span>`;
-				pontuacaoJ2.innerHTML = `pontuação J: <span style='color:#f00'>${pontosJ2}pt</span>`;
+				pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:#f00'>${pontosPc}pt</span>`;
+				pontuacaoJ2.innerHTML = `${username}: <span style='color:#f00'>${pontosJ}pt</span>`;
 				errosJ1 = 0;
 				errosJ2 = 0;
 				nomesExcluidos = [];
@@ -567,12 +597,14 @@ function playFunction(){
 					player1Square[i].innerHTML = '';
 					player2Square[i].innerHTML = '';
 				}
+						localStorage.setItem('pointsPc', pontosPc);
+						localStorage.setItem('pointsJ', pontosJ);
 			}
 			else if(errosJ1 == 8){
-				pontosJ2++;
-				alert("Jogador venceu!");
-				pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:#f00'>${pontosJ1}pt</span>`;
-				pontuacaoJ2.innerHTML = `pontuação J: <span style='color:#f00'>${pontosJ2}pt</span>`;
+				pontosJ++;
+				alert(`${username} venceu!`);
+				pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:#f00'>${pontosPc}pt</span>`;
+				pontuacaoJ2.innerHTML = `${username}: <span style='color:#f00'>${pontosJ}pt</span>`;
 				errosJ1 = 0;
 				errosJ2 = 0;
 				nomesExcluidos = [];
@@ -583,6 +615,8 @@ function playFunction(){
 					player1Square[i].innerHTML = '';
 					player2Square[i].innerHTML = '';
 				}
+						localStorage.setItem('pointsPc', pontosPc);
+						localStorage.setItem('pointsJ', pontosJ);
 			}
 			if(jog.length == 0){
 				alert('Jogo Empatado!');
@@ -654,10 +688,10 @@ function playFunction(){
 				errosJ1++;
 			}
 			if(errosJ2 == 8){
-				pontosJ1++;
+				pontosPc++;
 				alert("PC  venceu!");
-				pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:#f00'>${pontosJ1}pt</span>`;
-				pontuacaoJ2.innerHTML = `pontuação J: <span style='color:#f00'>${pontosJ2}pt</span>`;
+				pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:#f00'>${pontosPc}pt</span>`;
+				pontuacaoJ2.innerHTML = `${username}: <span style='color:#f00'>${pontosJ}pt</span>`;
 				errosJ1 = 0;
 				errosJ2 = 0;
 				nomesExcluidos = [];
@@ -668,12 +702,14 @@ function playFunction(){
 					player1Square[i].innerHTML = '';
 					player2Square[i].innerHTML = '';
 				}
+						localStorage.setItem('pointsPc', pontosPc);
+						localStorage.setItem('pointsJ', pontosJ);
 			}
 			else if(errosJ1 == 8){
-				pontosJ2++;
+				pontosJ++;
 				alert("Jogador venceu!");
-				pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:#f00'>${pontosJ1}pt</span>`;
-				pontuacaoJ2.innerHTML = `pontuação J: <span style='color:#f00'>${pontosJ2}pt</span>`;
+				pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:#f00'>${pontosPc}pt</span>`;
+				pontuacaoJ2.innerHTML = `${username}: <span style='color:#f00'>${pontosJ}pt</span>`;
 				errosJ1 = 0;
 				errosJ2 = 0;
 				nomesExcluidos = [];
@@ -684,6 +720,8 @@ function playFunction(){
 					player1Square[i].innerHTML = '';
 					player2Square[i].innerHTML = '';
 				}
+						localStorage.setItem('pointsPc', pontosPc);
+						localStorage.setItem('pointsJ', pontosJ);
 			}
 			if(jog.length == 0){
 				alert('Jogo Empatado!');
@@ -996,13 +1034,13 @@ function playFunction(){
 									temporizador();
 								}else{
 									//Colocar um audio de aviso
-									alert('Jogador  ou  pc não preencheu nenhuma letra!');
+									alert(`${username}  ou  pc não preencheu nenhuma letra!`);
 								}
 								if(errosJ2 == 8){
-									pontosJ1++;
+									pontosPc++;
 									alert("computador venceu!");
-									pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:#f00'>${pontosJ1}pt</span>`;
-									pontuacaoJ2.innerHTML = `pontuação J: <span style='color:#f00'>${pontosJ2}pt</span>`;
+									pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:#f00'>${pontosPc}pt</span>`;
+									pontuacaoJ2.innerHTML = `${username}: <span style='color:#f00'>${pontosJ}pt</span>`;
 									errosJ1 = 0;
 									errosJ2 = 0;
 									nomesExcluidos = [];
@@ -1013,11 +1051,13 @@ function playFunction(){
 										player1Square[i].innerHTML = '';
 										player2Square[i].innerHTML = '';
 									}
+									localStorage.setItem('pointsPc', pontosPc);
+									localStorage.setItem('pointsJ', pontosJ);
 								}else if(errosJ1 == 8){
-									pontosJ2++;
-									alert("Jogador venceu!");
-									pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:#f00'>${pontosJ1}pt</span>`;
-									pontuacaoJ2.innerHTML = `pontuação J: <span style='color:#f00'>${pontosJ2}pt</span>`;
+									pontosJ++;
+									alert(`${username} venceu!`);
+									pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:#f00'>${pontosPc}pt</span>`;
+									pontuacaoJ2.innerHTML = `${username}: <span style='color:#f00'>${pontosJ}pt</span>`;
 									errosJ1 = 0;
 									errosJ2 = 0;
 									nomesExcluidos = [];
@@ -1028,6 +1068,8 @@ function playFunction(){
 										player1Square[i].innerHTML = '';
 										player2Square[i].innerHTML = '';
 									}
+									localStorage.setItem('pointsPc', pontosPc);
+									localStorage.setItem('pointsJ', pontosJ);
 								}
 								if(jog.length == 0){
 									alert('Jogo Empatado!');
