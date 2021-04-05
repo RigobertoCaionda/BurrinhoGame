@@ -37,7 +37,7 @@ let pc;
 let player;
 let jog;//copia do jogador
 let time;
-let username = 'Jogador2';
+let username = 'Jogador2';//A informacao tem que vir primeiro daqui
 if(localStorage.getItem('username') === null){//Preciso dar um jeito de fazer esse aqui ser lido primeiro que a variavel username
 	let nome_usuario = prompt('digite seu nome, vamos guardá-lo para a próxima vez!');
 	localStorage.setItem('username', nome_usuario);
@@ -143,7 +143,7 @@ function temporizador(){
 
 				if(errosJ2 == 8){
 						pontosPc++;
-						alert("Jogador venceu!");
+						alert("computador venceu!");
 						pontuacaoJ1.innerHTML = `pontuação pc: <span style='color:#f00'>${pontosPc}pt</span>`;
 						pontuacaoJ2.innerHTML = `${username}: <span style='color:#f00'>${pontosJ}pt</span>`;
 						errosJ1 = 0;
@@ -160,7 +160,7 @@ function temporizador(){
 						localStorage.setItem('pointsJ', pontosJ);
 					}else if(errosJ1 == 8){
 							pontosJ++;
-							alert("computador venceu!");
+							alert(`${username} venceu!`);
 							pontuacaoJ1.innerHTML = `pontuação J1: <span style='color:#f00'>${pontosPc}pt</span>`;
 							pontuacaoJ2.innerHTML = `${username}: <span style='color:#f00'>${pontosJ}pt</span>`;
 							errosJ1 = 0;
