@@ -13,7 +13,8 @@ let paises = [
 		},
 		{
 			nome: 'alemanha',
-			continente: 'europa'
+			continente: 'europa',
+			img: 'assets/images/alemanha.png'
 		},
 		{
 			nome: 'andorra',
@@ -21,7 +22,8 @@ let paises = [
 		},
 		{
 			nome: 'angola',
-			continente: 'áfrica'
+			continente: 'áfrica',
+			img: 'assets/images/angola.png'
 		},
 		{
 			nome: 'antiga e barbuda',
@@ -97,7 +99,8 @@ let paises = [
 		},
 		{
 			nome: 'brasil',
-			continente: 'américa'
+			continente: 'américa',
+			img: 'assets/images/brasil.png'
 		},
 		{
 			nome: 'brunei',
@@ -240,12 +243,13 @@ let paises = [
 			continente: 'europa'
 		},
 		{
-			nome: 'estado da palestina',
+			nome: 'estado da',
 			continente: 'ásia'
 		},
 		{
 			nome: 'estados unidos',
-			continente: 'américa'
+			continente: 'américa',
+			img: 'assets/images/usa.jpg'
 		},
 		{
 			nome: 'estónia',
@@ -617,7 +621,8 @@ let paises = [
 		},
 		{
 			nome: 'rússia',
-			continente: 'europa'
+			continente: 'europa',
+			img: 'assets/images/russia.png'
 		},
 		{
 			nome: 'salomão',

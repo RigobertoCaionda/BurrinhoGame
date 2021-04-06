@@ -234,6 +234,8 @@ body{
 	text-align: center;
 	font-size: 2rem;
 	color: #fff;
+	margin:auto;
+	margin-bottom: 10px;
 }
 @media(min-width: 375px) and (max-width: 425px){
 	.table{
