@@ -504,10 +504,10 @@ function playFunction(){
 						});
 						if(resPC > -1 && jog[resPC].nome.startsWith(showWord.innerHTML.toLowerCase())){
 							if(showWord.innerHTML.length < jog[resPC].nome.length){
-								let abecedario = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+								let abecedario = ['A','B','C','D','E','F','G','H','I','J','L','M','N','O','P','Q','R','S','T','U','V','X','Z'];
 								let position = Math.floor(Math.random() * abecedario.length);
 								let letraIncorreta = abecedario[position];
-								let letras = [jog[resPC].nome[showWord.innerHTML.length],jog[resPC].nome[showWord.innerHTML.length],letraIncorreta,jog[resPC].nome[showWord.innerHTML.length],jog[resPC].nome[showWord.innerHTML.length]];//Posso criar outro array para nao ser so A
+								let letras = [jog[resPC].nome[showWord.innerHTML.length],jog[resPC].nome[showWord.innerHTML.length],jog[resPC].nome[showWord.innerHTML.length],jog[resPC].nome[showWord.innerHTML.length],letraIncorreta, jog[resPC].nome[showWord.innerHTML.length]];
 								let letraAleatoria = Math.floor(Math.random() * letras.length);
 								let letrasPosicaoI = letras[letraAleatoria];
 								let arrayOpcoes = [jog[resPC].nome[showWord.innerHTML.length], letrasPosicaoI];
@@ -589,10 +589,10 @@ function playFunction(){
 						});
 						if(resPC > -1 && country[resPC].nome.startsWith(showWord.innerHTML.toLowerCase())){
 							if(showWord.innerHTML.length < country[resPC].nome.length){
-								let abecedario = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+								let abecedario = ['A','B','C','D','E','F','G','H','I','J','L','M','N','O','P','Q','R','S','T','U','V','X','Z'];
 								let position = Math.floor(Math.random() * abecedario.length);
 								let letraIncorreta = abecedario[position];
-								let letras = [country[resPC].nome[showWord.innerHTML.length],country[resPC].nome[showWord.innerHTML.length],letraIncorreta,country[resPC].nome[showWord.innerHTML.length],country[resPC].nome[showWord.innerHTML.length]];
+								let letras = [country[resPC].nome[showWord.innerHTML.length],country[resPC].nome[showWord.innerHTML.length], country[resPC].nome[showWord.innerHTML.length],country[resPC].nome[showWord.innerHTML.length],letraIncorreta, country[resPC].nome[showWord.innerHTML.length]];
 								let letraAleatoria = Math.floor(Math.random() * letras.length);
 								let letrasPosicaoI = letras[letraAleatoria];
 								let arrayOpcoes = [country[resPC].nome[showWord.innerHTML.length], letrasPosicaoI];
@@ -606,11 +606,11 @@ function playFunction(){
 								setTimeout(playFunctionPC, 2000);
 							}
 						}else{
-							if(pc.classList.contains('pulse')){//Tlavez nao seja necessario
+							if(pc.classList.contains('pulse')){
 							if(showWord.innerHTML !== ''){
 								interroga1PCPais();
-								setTimeout(playFunctionPC, 2000);//Ver isso
-							}else{//O else tmbm nao
+								setTimeout(playFunctionPC, 2000);
+							}else{
 								alert('Formem o nome de um jogador primero!');
 							}
 							typedLetter.focus();
@@ -1059,7 +1059,7 @@ function playFunction(){
 			}
 			if(errosJ2 == 8){
 				pontosPc++;
-				alert("PC  venceu!");
+				alert("Computador  venceu!");
 				pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:#f00'>${pontosPc}pt</span>`;
 				pontuacaoJ2.innerHTML = `${username}: <span style='color:#f00'>${pontosJ}pt</span>`;
 				errosJ1 = 0;
@@ -1077,7 +1077,7 @@ function playFunction(){
 			}
 			else if(errosJ1 == 8){
 				pontosJ++;
-				alert("Jogador venceu!");
+				alert(`${username} venceu!`);
 				pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:#f00'>${pontosPc}pt</span>`;
 				pontuacaoJ2.innerHTML = `${username}: <span style='color:#f00'>${pontosJ}pt</span>`;
 				errosJ1 = 0;
@@ -1163,7 +1163,7 @@ function playFunction(){
 			}
 			if(errosJ2 == 8){
 				pontosPc++;
-				alert("PC  venceu!");
+				alert("Computador  venceu!");
 				pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:#f00'>${pontosPc}pt</span>`;
 				pontuacaoJ2.innerHTML = `${username}: <span style='color:#f00'>${pontosJ}pt</span>`;
 				errosJ1 = 0;
@@ -1181,7 +1181,7 @@ function playFunction(){
 			}
 			else if(errosJ1 == 8){
 				pontosJ++;
-				alert("Jogador venceu!");
+				alert(`${username} venceu!`);
 				pontuacaoJ1.innerHTML = `pontuação PC: <span style='color:#f00'>${pontosPc}pt</span>`;
 				pontuacaoJ2.innerHTML = `${username}: <span style='color:#f00'>${pontosJ}pt</span>`;
 				errosJ1 = 0;
