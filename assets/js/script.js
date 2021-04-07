@@ -135,7 +135,7 @@ function temporizador(){
 							imagePanel.style.display = 'none';
 							player1Square[errosJ1].innerHTML = perdeu[errosJ1];
 							errosJ1++;
-							showWord.innerHTML = '';//So para garantir, ele nunca deixa o tempo acabar
+							showWord.innerHTML = '';//So para garantir, mas ele nunca deixa o tempo acabar
 							pc.classList.remove('pulse');
 							player.classList.add('pulse');
 							temporizador();
@@ -216,7 +216,6 @@ function inicia(){
 		case 'jogador':
 			switch(modeValue){
 				case 'amigo':
-				//regras para amigo
 				player1 = document.querySelector('#player1');
 				player2 = document.querySelector('#player2');
 				let interrogaJ1 = document.querySelector('#question-mark-j1');
@@ -240,7 +239,6 @@ function inicia(){
 							if(showWord.innerHTML !== ''){
 								interroga1();
 							}else{
-								//efeitos sonoro para aviso
 								alert('Formem o nome de um jogador primero!');
 							}
 							typedLetter.focus();
@@ -254,7 +252,6 @@ function inicia(){
 							if(showWord.innerHTML !== ''){
 								interroga2();
 							}else{
-								//efeitos sonoro para aviso
 								alert('Formem o nome de um jogador primero!');
 							}
 							typedLetter.focus();
@@ -302,20 +299,19 @@ function inicia(){
 							player.classList.remove('pulse');
 						}
 						pc.classList.add('pulse');
-						setTimeout(playFunctionPC, 2000);//Quando o pc inicia ele ja chama a funcao playFunction
+						setTimeout(playFunctionPC, 2000);
 					}else if(playerStart == '1'){
 						if(pc.classList.contains('pulse')){
 							pc.classList.remove('pulse');
 						}
 						player.classList.add('pulse');
-					}//Parei aqui
+					}
 					play.addEventListener('click', playFunctionPC);
 					interrogaJ.addEventListener('click',()=>{
 						if(player.classList.contains('pulse')){
 							if(showWord.innerHTML !== ''){
 								interroga2J();
 							}else{
-								//efeitos sonoro para aviso
 								alert('Formem o nome de um jogador primero!');
 							}
 							typedLetter.focus();
@@ -511,7 +507,7 @@ function playFunction(){
 								let abecedario = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 								let position = Math.floor(Math.random() * abecedario.length);
 								let letraIncorreta = abecedario[position];
-								let letras = [jog[resPC].nome[showWord.innerHTML.length],letraIncorreta,jog[resPC].nome[showWord.innerHTML.length]];//Posso criar outro array para nao ser so A
+								let letras = [jog[resPC].nome[showWord.innerHTML.length],jog[resPC].nome[showWord.innerHTML.length],letraIncorreta,jog[resPC].nome[showWord.innerHTML.length],jog[resPC].nome[showWord.innerHTML.length]];//Posso criar outro array para nao ser so A
 								let letraAleatoria = Math.floor(Math.random() * letras.length);
 								let letrasPosicaoI = letras[letraAleatoria];
 								let arrayOpcoes = [jog[resPC].nome[showWord.innerHTML.length], letrasPosicaoI];
@@ -522,7 +518,7 @@ function playFunction(){
 								player.classList.add('pulse');
 							}else{
 								finishPC();
-									setTimeout(playFunctionPC, 2000);//Muito massa, foi dificil
+									setTimeout(playFunctionPC, 2000);
 							}
 						}else if(resPC > -1 && jog[resPC].sobrenome.startsWith(showWord.innerHTML.toLowerCase())){
 							if(showWord.innerHTML.length < jog[resPC].sobrenome.length){
@@ -531,16 +527,15 @@ function playFunction(){
 								player.classList.add('pulse');
 							}else{
 								finishPC();
-									setTimeout(playFunctionPC, 2000);//Muito massa, foi dificil
+									setTimeout(playFunctionPC, 2000);
 							}
 
 						}else{
-							if(pc.classList.contains('pulse')){//Tlavez nao seja necessario
+							if(pc.classList.contains('pulse')){
 							if(showWord.innerHTML !== ''){
 								interroga1PC();
-								setTimeout(playFunctionPC, 2000);//Ver isso
-							}else{//O else tmbm nao
-								//efeitos sonoro para aviso
+								setTimeout(playFunctionPC, 2000);
+							}else{
 								alert('Formem o nome de um jogador primero!');
 							}
 							typedLetter.focus();
@@ -597,7 +592,7 @@ function playFunction(){
 								let abecedario = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 								let position = Math.floor(Math.random() * abecedario.length);
 								let letraIncorreta = abecedario[position];
-								let letras = [country[resPC].nome[showWord.innerHTML.length],letraIncorreta,country[resPC].nome[showWord.innerHTML.length]];
+								let letras = [country[resPC].nome[showWord.innerHTML.length],country[resPC].nome[showWord.innerHTML.length],letraIncorreta,country[resPC].nome[showWord.innerHTML.length],country[resPC].nome[showWord.innerHTML.length]];
 								let letraAleatoria = Math.floor(Math.random() * letras.length);
 								let letrasPosicaoI = letras[letraAleatoria];
 								let arrayOpcoes = [country[resPC].nome[showWord.innerHTML.length], letrasPosicaoI];
