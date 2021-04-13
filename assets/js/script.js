@@ -221,7 +221,7 @@ function inicia(){
 				let interrogaJ1 = document.querySelector('#question-mark-j1');
 				let interrogaJ2 = document.querySelector('#question-mark-j2');
 				if(playing){
-					let playerStart = Math.floor(Math.random() * 2);
+					let playerStart = Math.round(Math.random() * 1);
 					if(playerStart == '0'){
 						if(player2.classList.contains('pulse')){
 							player2.classList.remove('pulse');
@@ -293,7 +293,7 @@ function inicia(){
 				pc.innerHTML = 'PC';
 				player.innerHTML = 'J';
 				if(playing){
-					let playerStart = Math.floor(Math.random() * 2);
+					let playerStart = Math.round(Math.random() * 1);
 					if(playerStart == '0'){
 						if(player.classList.contains('pulse')){
 							player.classList.remove('pulse');
@@ -343,7 +343,7 @@ function inicia(){
 				let interrogaJ1 = document.querySelector('#question-mark-j1');
 				let interrogaJ2 = document.querySelector('#question-mark-j2');
 				if(playing){
-					let playerStart = Math.floor(Math.random() * 2);
+					let playerStart = Math.round(Math.random() * 1);
 					if(playerStart == '0'){
 						if(player2.classList.contains('pulse')){
 							player2.classList.remove('pulse');
@@ -415,7 +415,7 @@ function inicia(){
 				pc.innerHTML = 'PC';
 				player.innerHTML = 'J';
 				if(playing){
-					let playerStart = Math.floor(Math.random() * 2);
+					let playerStart = Math.round(Math.random() * 1);
 					if(playerStart == '0'){
 						if(player.classList.contains('pulse')){
 							player.classList.remove('pulse');
@@ -505,13 +505,13 @@ function playFunction(){
 						if(resPC > -1 && jog[resPC].nome.startsWith(showWord.innerHTML.toLowerCase())){
 							if(showWord.innerHTML.length < jog[resPC].nome.length){
 								let abecedario = ['A','B','C','D','E','F','G','H','I','J','L','M','N','O','P','Q','R','S','T','U','V','X','Z'];
-								let position = Math.floor(Math.random() * abecedario.length);
+								let position = Math.round(Math.random() * (abecedario.length - 1));
 								let letraIncorreta = abecedario[position];
 								let letras = [jog[resPC].nome[showWord.innerHTML.length],jog[resPC].nome[showWord.innerHTML.length],jog[resPC].nome[showWord.innerHTML.length],jog[resPC].nome[showWord.innerHTML.length],letraIncorreta, jog[resPC].nome[showWord.innerHTML.length]];
-								let letraAleatoria = Math.floor(Math.random() * letras.length);
+								let letraAleatoria = Math.round(Math.random() * (letras.length - 1));
 								let letrasPosicaoI = letras[letraAleatoria];
 								let arrayOpcoes = [jog[resPC].nome[showWord.innerHTML.length], letrasPosicaoI];
-								let zeroUm = Math.floor(Math.random() * arrayOpcoes.length);
+								let zeroUm = Math.round(Math.random() * (arrayOpcoes.length - 1));
 								let nomePosicaoI = arrayOpcoes[zeroUm];
 								showWord.innerHTML += nomePosicaoI.toUpperCase();
 								pc.classList.remove('pulse');
@@ -547,7 +547,7 @@ function playFunction(){
 		
 						typedLetter.value = '';
 					}else{
-						let randomNumber = Math.floor(Math.random() * jog.length);
+						let randomNumber = Math.round(Math.random() * (jog.length - 1));
 						if(jog[randomNumber].nome[0] > 'l'){
 							showWord.innerHTML = jog[randomNumber].sobrenome[0].toUpperCase();
 						}else{
@@ -590,13 +590,13 @@ function playFunction(){
 						if(resPC > -1 && country[resPC].nome.startsWith(showWord.innerHTML.toLowerCase())){
 							if(showWord.innerHTML.length < country[resPC].nome.length){
 								let abecedario = ['A','B','C','D','E','F','G','H','I','J','L','M','N','O','P','Q','R','S','T','U','V','X','Z'];
-								let position = Math.floor(Math.random() * abecedario.length);
+								let position = Math.round(Math.random() * (abecedario.length - 1));
 								let letraIncorreta = abecedario[position];
 								let letras = [country[resPC].nome[showWord.innerHTML.length],country[resPC].nome[showWord.innerHTML.length], country[resPC].nome[showWord.innerHTML.length],country[resPC].nome[showWord.innerHTML.length],letraIncorreta, country[resPC].nome[showWord.innerHTML.length]];
-								let letraAleatoria = Math.floor(Math.random() * letras.length);
+								let letraAleatoria = Math.round(Math.random() * (letras.length - 1));
 								let letrasPosicaoI = letras[letraAleatoria];
 								let arrayOpcoes = [country[resPC].nome[showWord.innerHTML.length], letrasPosicaoI];
-								let zeroUm = Math.floor(Math.random() * arrayOpcoes.length);
+								let zeroUm = Math.round(Math.random() * (arrayOpcoes.length - 1));
 								let nomePosicaoI = arrayOpcoes[zeroUm];
 								showWord.innerHTML += nomePosicaoI.toUpperCase();
 								pc.classList.remove('pulse');
@@ -622,7 +622,7 @@ function playFunction(){
 		
 						typedLetter.value = '';
 					}else{
-						let randomNumber = Math.floor(Math.random() * country.length);
+						let randomNumber = Math.round(Math.random() * (country.length - 1));
 						showWord.innerHTML = country[randomNumber].nome[0].toUpperCase();
 						pc.classList.remove('pulse');
 						player.classList.add('pulse');
