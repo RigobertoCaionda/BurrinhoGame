@@ -387,7 +387,7 @@ function inicia(){
 							playFunction();
 						}
 					});
-					done.addEventListener('click', finish);
+					done.addEventListener('click', finishPais);
 					document.addEventListener('keyup',(e)=>{
 						if(e.keyCode == 38){
 							finishPais();
